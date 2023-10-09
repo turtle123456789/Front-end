@@ -1,0 +1,370 @@
+export const productsData = [
+    {
+      id: 1,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (12).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 2,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 3,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (14).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 4,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (15).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 5,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 6,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    // Thêm các sản phẩm khác nếu cần
+  ];
+  export const productSellerData = [
+    {
+      id: 1,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (12).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 2,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 3,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (14).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 4,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (15).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 5,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 6,
+      type: 'face',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 7,
+      type: 'face',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 8,
+      type: 'face',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 9,
+      type: 'face',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 10,
+      type: 'face',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 11,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 12,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 13,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 14,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 15,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 16,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 17,
+      type: 'lip',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 18,
+      type: 'face',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 19,
+      type: 'face',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (16).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 22,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (15).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 23,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 24,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (15).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 25,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 26,
+      type: 'eye',
+      name: 'Sản phẩm 2',
+      image: require('../assets/images/image 119 (15).webp'),
+      description: 'Mô tả sản phẩm 2',
+      originalPrice: 250000,
+      discountedPrice:4000,
+      discountPercentage: 20,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 27,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 287,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    {
+      id: 29,
+      type: 'eye',
+      name: 'Mặt Nạ Miếng Dưỡng Ẩm',
+      image: require('../assets/images/image 119 (13).webp'),
+      description: 'Mô tả sản phẩm 1',
+      originalPrice: 400000,
+      discountedPrice:4000,
+      discountPercentage: 15,
+      gift: 'jsahbdjasbdkjhsdkjasdmabsd'
+    },
+    // Thêm các sản phẩm khác nếu cần
+  ];
+  

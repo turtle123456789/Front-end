@@ -19,10 +19,10 @@ const HeaderComponent = () => {
 
   return (
     <div>
-        <Row>
-          <Col span={24}><img src={posterMain} alt="poster"  style={TopHeader}/></Col>
-        </Row>
         <Container>
+          <Row>
+            <Col span={24}><img src={posterMain} alt="poster"  style={TopHeader}/></Col>
+          </Row>
           <MenuMain>
             <LinkFilter><IconMenu></IconMenu></LinkFilter>
             <a href={"https://www.facebook.com/profile.php?id=100057094481241"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>

@@ -12,6 +12,8 @@ padding: 0;
         list-style: none;
         margin-bottom: 24px;
         width: 282px;
+        display: flex;
+        
     }
     a{
         font-weight: 500;
@@ -19,12 +21,56 @@ padding: 0;
         display: inline-flex;
         width: 100%;
         align-items: center;
-        padding-bottom: 8px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
     span{
-        margin-left: 18px;
+        margin-left: 5px 18px;
         font-size: 16px;
+    }
+
+`
+export const CategoryMenuBenefits = styled.div`
+    display: flex;
+    position: absolute;
+    background: var(--white);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 100%;
+    width: calc(100% - 350px);
+    top: 0;
+    right: ${(props) => (props.show ? '0' : '-100%')};
+    animation: slide-in 1s ease forwards; // Thêm animation slide-in
+    /* ... */
+    
+    @keyframes slide-in {
+      from {
+        right: -100%; // Vị trí ban đầu (điều này có thể điều chỉnh)
+      }
+      to {
+        right: 0; // Vị trí cuối cùng (điều chỉnh cho phù hợp)
+      }
+    }
+    span{
+        color: var(--black);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+    }
+    li{
+        color: var(--black);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 36px; /* 225% */
+    }
+    a{
+        border: none;
+    }
+    a:hover{
+        opacity: 0.7;
+        
     }
 `
 export const BannerMain = styled.div`
@@ -44,6 +90,7 @@ export const BannerRight = styled.div`
 export const MenuEven = styled.div`
     display: flex;
     justify-content: space-around;
+    margin: 20px 0;
     img{
         max-width: 66px;
         max-height: 66px;
@@ -58,10 +105,35 @@ export const MenuEven = styled.div`
         font-size: 14px;
     }
 `
-export const ListTypeProduct = styled.div`
+export const BrandProduct = styled.div`
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 100%;
-    gap: 50px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 30px;
+`
+export const BrandProductName = styled.div`
+    max-width: 400px;
+    p{
+        font-size: 18px;
+    }
+    a{
+        color: #4E6FB0;
+        font-size: 13px;
+    }
+}
+`
+export const BestSeller = styled.div`
+    margin: 20px 30px;
+    position: relative;
+    display: block;
+    .seeMore{
+        font-size: 16px;
+        color: var(--orange);
+        border-radius: 10px;
+        border: 2px solid var(--orange);
+        padding: 5px 20px;
+    }
+    .seeMore:hover{
+        opacity: 0.8;
+    }
 `

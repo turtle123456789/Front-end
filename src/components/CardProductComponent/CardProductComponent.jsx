@@ -4,7 +4,7 @@ import iconShopingCar from '../../assets/images/shopping-cart 10.svg'
 import iconWhiteHeart from '../../assets/images/heart 8.svg'
 const CardProductComponent = ({ product }) => {
   return (
-    <div style={{maxWidth: '269px'}}>
+    <div >
       <ProductImg>
         <img src={product.image} alt={product.name} />
       </ProductImg>

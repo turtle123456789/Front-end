@@ -58,8 +58,8 @@ export const IconMenu = styled.div`
 export const SearchProduct = styled.div`
     display: flex;
     max-width: 674px;
-    flex-wrap: wrap;
     padding-top: 24px;
+    flex-wrap: wrap;
 `
 export const ChooseUse = styled.div`
     a{
@@ -75,6 +75,7 @@ export const ChooseUse = styled.div`
 export const FormSearch = styled(Form)`
     width: 100%;
     display: flex;
+    
 `
 export const IconContact = styled.a`
     display: flex;

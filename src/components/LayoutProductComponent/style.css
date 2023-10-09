@@ -1,0 +1,65 @@
+.page {
+    position: relative; /* Change to relative to make child elements position correctly */
+    width: 100%;
+    opacity: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    background-color: #fff; /* Add a background color to the page */
+    padding: 20px; /* Add padding to the page content */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+  
+  /* Hide elements with .page-hidden class */
+  .page-hidden {
+    pointer-events: none;
+    display: none
+  }
+  
+  /* Style the product list */
+  .list-product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+  
+  /* Style the group of buttons */
+  .groupButton {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+  }
+  
+  /* Style the buttons */
+  .button {
+    border: none;
+    color: #000;
+    background-color: #DDD9D9;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 20px;
+    text-align: center; /* Center button text */
+    text-decoration: none; /* Remove default link styling */
+    display: inline-block; /* Ensure inline display for buttons */
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  
+    /* Add more button styles here if needed */
+  }
+  
+  .button.active {
+    background-color: #E26B14;
+    color: #FFF;
+  }
+  
+  .button:hover {
+    background-color: #E26B14;
+    color: #FFF;
+  }
+  
+  .button:active {
+    background-color: #E26B14;
+    color: #FFF;
+  }

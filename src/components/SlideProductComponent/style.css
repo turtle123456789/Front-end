@@ -1,0 +1,21 @@
+@import "../../index.css";
+.slick-list{
+    max-width: 1476px;
+    margin: 0 30px;
+}
+.slick-prev{
+    left: 32px;
+    z-index: 1;
+}
+.slick-prev::before{
+    color: var(--black);
+    font-size: 48px;
+}
+.slick-next{
+    right: 60px;
+}
+.slick-next::before{
+    color: var(--black);
+    font-size: 48px;
+
+}

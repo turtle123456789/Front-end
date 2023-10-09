@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import '../../index.css'
 export const ProductImg = styled.div`
-    max-width: 269px;
     img{
         width: 100%;
         border-radius: 10px;
