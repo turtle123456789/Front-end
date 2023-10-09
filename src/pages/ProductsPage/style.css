@@ -1,0 +1,4 @@
+.priceSubMenu {
+    max-height: 350px; /* Điều chỉnh chiều cao tối đa của submenu trước khi nó bắt đầu cuộn */
+    overflow-y: auto; /* Cho phép cuộn khi submenu vượt quá kích thước */
+  }

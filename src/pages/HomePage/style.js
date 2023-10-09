@@ -13,7 +13,6 @@ padding: 0;
         margin-bottom: 24px;
         width: 282px;
         display: flex;
-        
     }
     a{
         font-weight: 500;
@@ -39,6 +38,7 @@ export const CategoryMenuBenefits = styled.div`
     width: calc(100% - 350px);
     top: 0;
     right: ${(props) => (props.show ? '0' : '-100%')};
+    transition: right 0.5s ease;
     animation: slide-in 1s ease forwards; // Thêm animation slide-in
     /* ... */
     

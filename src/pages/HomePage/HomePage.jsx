@@ -1,4 +1,4 @@
-import React ,{ useState} from 'react'
+import React ,{ useState, useEffect } from 'react'
 import { Container } from '../../components/ContainerComponent/ContainerComponent'
 import { BannerMain, BannerRight, BestSeller, BrandProduct, BrandProductName, CategoryMenuBenefits , HomeAd, MenuBenefits, MenuEven } from './style'
 import bannerMain from '../../assets/images/Banner-main.webp'
@@ -31,17 +31,28 @@ import { brandsData } from '../../Data/BrandData'
 import { TopHeader } from '../../components/HeaderComponent/style'
 import LayoutProductComponent from '../../components/LayoutProductComponent/LayoutProductComponent'
 import LayoutTypeProductComponent from '../../components/LayoutTypeProductComponent/LayoutTypeProductComponent'
-import FooterComponent from '../../components/FooterComponent/FooterComponent'
 const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [menuTimeout, setMenuTimeout] = useState(null); // Thêm state để quản lý setTimeout
 
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
+    clearTimeout(menuTimeout); // Hủy bỏ setTimeout nếu có
   };
-
   const handleMouseLeave = () => {
-    setActiveIndex(null);
+    // Sử dụng setTimeout để chờ trước khi ẩn CategoryMenuBenefits
+    const timeout = setTimeout(() => {
+      setActiveIndex(null);
+    }, 500); // Chờ 0.5 giây trước khi ẩn
+
+    setMenuTimeout(timeout); // Lưu giá trị setTimeout vào state
   };
+  useEffect(() => {
+    // Hủy bỏ setTimeout nếu component bị unmount
+    return () => {
+      clearTimeout(menuTimeout);
+    };
+  }, [menuTimeout]);
   return (
     <div>
       <Container>
@@ -197,24 +208,33 @@ const HomePage = () => {
               <CategoryMenuBenefits show={activeIndex === 3}>
                 <ul>
                   <br />
-                  <span>Dầu gội- Dầu xả</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gàu</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gãy rụng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị tóc bạc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm mượt tóc</a></li>
+                  <span>Dưỡng thể</span>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sữa tắm</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy tế bào chết Body</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Chống nắng body</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xà bông tắm</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tinh dầu</a></li>
+
                 </ul>
                 <ul>
                   <br />
-                  <span>Kem ủ</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ phục hồi tóc hư tổn</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc nhuộm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc uốn</a></li>
+                  <span>Chăm sóc răng miệng</span>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem đánh răng</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Bàn chải đánh răng</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước súc miệng</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị hôi miệng</a></li>
                 </ul>
                 <ul>
                   <br />
-                  <span>Dầu dưỡng tóc</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Keo xịt tóc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Thuốc nhuộm</a></li>
+                  <span>Khử mùi</span>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Lăn khử mùi</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sáp khử mùi</a></li>
+                </ul>                
+                <ul>
+                  <br />
+                  <span>Vệ sinh phụ nữ</span>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Băng vệ sinh</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dung dịch vệ sinh</a></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
@@ -230,24 +250,10 @@ const HomePage = () => {
               <CategoryMenuBenefits show={activeIndex === 4}>
                 <ul>
                   <br />
-                  <span>Dầu gội- Dầu xả</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gàu</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gãy rụng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị tóc bạc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm mượt tóc</a></li>
-                </ul>
-                <ul>
-                  <br />
-                  <span>Kem ủ</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ phục hồi tóc hư tổn</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc nhuộm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc uốn</a></li>
-                </ul>
-                <ul>
-                  <br />
-                  <span>Dầu dưỡng tóc</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Keo xịt tóc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Thuốc nhuộm</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa mini</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa nam</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa nữ</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa Unisex</a></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
@@ -263,24 +269,9 @@ const HomePage = () => {
               <CategoryMenuBenefits show={activeIndex === 5}>
                 <ul>
                   <br />
-                  <span>Dầu gội- Dầu xả</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gàu</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gãy rụng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị tóc bạc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm mượt tóc</a></li>
-                </ul>
-                <ul>
-                  <br />
-                  <span>Kem ủ</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ phục hồi tóc hư tổn</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc nhuộm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc uốn</a></li>
-                </ul>
-                <ul>
-                  <br />
-                  <span>Dầu dưỡng tóc</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Keo xịt tóc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Thuốc nhuộm</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ điều trị bệnh</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ giảm cân</a></li>
+                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ làm đẹp</a></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
@@ -362,7 +353,6 @@ const HomePage = () => {
             <a className='seeMore' href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xem thêm <img src={iconArrow} alt="" style={{fontSize: '16px',color: 'var(--orangin)', border: '2px solid var(--orangin)'}}/></a>
           </div>
         </BestSeller>
-        <FooterComponent/>
       </Container>
     </div>
   )
