@@ -1,12 +1,12 @@
-import { Col, Row ,Checkbox, Pagination} from 'antd'
-import React, { useState } from 'react';
+import { Col, Row, Checkbox, Pagination } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import { Tabs } from 'antd';
 import LayoutProductHome from '../../components/LayoutProductHome/LayoutProductHome';
 import { productsData } from '../../Data/ProductData';
 import { paginationRight } from '../../components/LayoutProductHome/style';
 import { Container } from '../../components/ContainerComponent/ContainerComponent';
-import './style.css'
+import './style.css';
 const ITEMS_PER_PAGE = 20;
 const onChange = (key) => {
   console.log(key);
@@ -15,7 +15,19 @@ const items1 = [
   {
     key: '1',
     label: 'Bán chạy',
-    children: 'Content of Tab Pane 1',
+    childrenRenderer: ({ currentProducts, totalProducts, currentPage, handlePageChange }) => (
+      <>
+        <LayoutProductHome ProductData={productsData} />
+        <Pagination
+          defaultCurrent={1}
+          total={totalProducts}
+          pageSize={ITEMS_PER_PAGE}
+          current={currentPage}
+          onChange={handlePageChange}
+          style={paginationRight}
+        />
+      </>
+    ),
   },
   {
     key: '2',
@@ -84,40 +96,44 @@ const items = [
 const ProductsPage = () => {
   const [mode] = useState('inline');
   const [theme] = useState('light');
-  
+
   // State để lưu trữ các tùy chọn đã chọn
   const [selectedOptions, setSelectedOptions] = useState([]);
-  
+
+  // State cho các biến và hàm xử lý
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
+
   // Hàm xử lý khi checkbox thay đổi trạng thái
   const handleCheckboxChange = (optionKey) => {
     if (selectedOptions.includes(optionKey)) {
-      // Nếu tùy chọn đã được chọn, loại bỏ nó khỏi danh sách
       setSelectedOptions(selectedOptions.filter((key) => key !== optionKey));
     } else {
-      // Nếu tùy chọn chưa được chọn, thêm nó vào danh sách
       setSelectedOptions([...selectedOptions, optionKey]);
     }
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
+  // Hàm xử lý khi chuyển trang
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
-  // Tính toán số trang dựa trên số sản phẩm và kích thước mỗi trang
-  const totalProducts = productsData.length;
+  useEffect(() => {
+    // Trong useEffect này, bạn có thể lấy dữ liệu sản phẩm và cập nhật các state currentProducts và totalProducts
+    // Ví dụ lấy dữ liệu sản phẩm từ productsData
+    const currentProducts = productsData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+    const totalProducts = productsData.length;
 
-  // Lấy danh sách sản phẩm cho trang hiện tại
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProducts = productsData.slice(startIndex, endIndex);
-    // Hàm xử lý khi chuyển trang
-    const handlePageChange = (page) => {
-      setCurrentPage(page);
-    };
-  return (
-    <div>
-      <Container>
-        <Row style={{margin: '10px 30px'}}>
-          <Col span={18} push={6}>
-            <Tabs defaultActiveKey="1" items={items1} onChange={onChange} />
+    // Cập nhật state currentProducts và totalProducts
+    setCurrentProducts(currentProducts);
+    setTotalProducts(totalProducts);
+  }, [currentPage]);
+  const renderTabContent = (key) => {
+    switch (key) {
+      case '1':
+        return (
+          <>
             <LayoutProductHome ProductData={currentProducts} />
             <Pagination
               defaultCurrent={1}
@@ -127,6 +143,29 @@ const ProductsPage = () => {
               onChange={handlePageChange}
               style={paginationRight}
             />
+          </>
+        );
+      case '2':
+        return <div>Content of Tab Pane 2</div>;
+      case '3':
+        return <div>Content of Tab Pane 3</div>;
+      // Add cases for other tabs as needed
+      default:
+        return null;
+    }
+  };
+  return (
+    <div>
+      <Container>
+        <Row style={{margin: '10px 30px'}}>
+          <Col span={18} push={6}>
+            <Tabs defaultActiveKey="1" onChange={onChange}>
+              {items1.map((item) => (
+                <Tabs.TabPane key={item.key} tab={item.label}>
+                  {renderTabContent(item.key)}
+                </Tabs.TabPane>
+              ))}
+            </Tabs>
           </Col>
           <Col span={6} pull={18} style={{textAlign: 'center'}}>
             <h3>Danh mục</h3>
@@ -148,10 +187,10 @@ const ProductsPage = () => {
                   title={menuItem.label}
                   className={menuItem.key === 'sub1' ? 'priceSubMenu' : ''}
                   overflowedIndicator={<span>&gt;</span>}
-                  >
+                >
                     {menuItem.children.map((option, index) => (
                       // Hiển thị chỉ một số options (ví dụ: 10) và ẩn đi options còn lại trong thanh cuộn
-                      index < 1000 && (
+                      index < 10 && (
                         <Menu.Item key={option.key}>
                           <Checkbox
                             onChange={() => handleCheckboxChange(option.key)}

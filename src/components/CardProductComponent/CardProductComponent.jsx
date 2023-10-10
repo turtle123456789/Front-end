@@ -4,7 +4,7 @@ import iconShopingCar from '../../assets/images/shopping-cart 10.svg'
 import iconWhiteHeart from '../../assets/images/heart 8.svg'
 const CardProductComponent = ({ product }) => {
   return (
-    <div >
+    <div style={{maxWidth: '269px'}}>
       <ProductImg>
         <img src={product.image} alt={product.name} />
       </ProductImg>
@@ -37,7 +37,7 @@ const CardProductComponent = ({ product }) => {
             </svg>
             <div className="quantity">
               <img src={iconShopingCar} alt=""/>
-              <span className="quantityProduct">1.145</span>
+              <span className="quantityProduct">{product.quantyti}</span>
             </div>
           </div>
           <div class="like">
