@@ -2,10 +2,15 @@ import React from 'react'
 import { FormShip, GiftSale, LevelOfLiking, ProductContent, ProductImg, ProductName, ProductPrice } from './style'
 import iconShopingCar from '../../assets/images/shopping-cart 10.svg'
 import iconWhiteHeart from '../../assets/images/heart 8.svg'
-const CardProductComponent = ({ product }) => {
+import { Link } from 'react-router-dom'
+const CardProductComponent = ({ product, isSellerProduct }) => {
+  const percentage = Math.floor(((product.originalPrice - product.discountedPrice) / product.originalPrice) * 100);
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat('vi-VN').format(number); // Chọn ngôn ngữ và quốc gia theo ý muốn
+};
   return (
-    <div style={{maxWidth: '269px'}}>
-      <ProductImg>
+    <div style={{maxWidth: '269px', backgroundColor: '#fafafa'}}>
+      <ProductImg >
         <img src={product.image} alt={product.name} />
       </ProductImg>
       <div style={{margin: '0 10px'}}>
@@ -14,17 +19,19 @@ const CardProductComponent = ({ product }) => {
           <span style={{background: 'var(--brown)'}}>BEST</span>
         </FormShip>
         <ProductName>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}><h4>{product.name}</h4></a>
+          <Link to={`/ProductDetails/${product.id}`}>
+            <h4 className='crop-text2' style={{ height: '48px' }}>{product.name}</h4>
+          </Link>
         </ProductName>
         <ProductContent>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"} className='crop-text2'>{product.description}</a>
+          <a href={"ProductDetails"} className='crop-text2' style={{height: '50px'}}>{product.description}</a>
         </ProductContent>
         <ProductPrice>
           <div>
-            <span className="originalPrice">{product.originalPrice} đ</span>
-            <span className="discountedPrice">{product.discountedPrice} đ</span>
+            <span className="originalPrice">{formatNumber(product.originalPrice)} đ</span>
+            <span className="discountedPrice">{formatNumber(product.discountedPrice)} đ</span>
           </div>
-          <span className='discountPercentage'>{product.discountPercentage}%</span>
+          <span className='discountPercentage'>{percentage}%</span>
         </ProductPrice>
         <LevelOfLiking>
           <div className="review">
@@ -37,16 +44,18 @@ const CardProductComponent = ({ product }) => {
             </svg>
             <div className="quantity">
               <img src={iconShopingCar} alt=""/>
-              <span className="quantityProduct">{product.quantyti}</span>
+              <span className="quantityProduct">{product.quantity}</span>
             </div>
           </div>
-          <div class="like">
+          <div className="like">
             <img src={iconWhiteHeart} alt=""/>
           </div>
         </LevelOfLiking>
+        {isSellerProduct && (
         <GiftSale>
-          <span className="crop-text1" >{product.gift}</span>
+          <span className="crop-text1">{product.gift}</span>
         </GiftSale>
+      )}
       </div>
     </div>
   )

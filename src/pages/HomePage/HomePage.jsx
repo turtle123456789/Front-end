@@ -330,7 +330,7 @@ const HomePage = () => {
         <br /><br />
         <HeaderSaleComponent/>
         <br /><br />
-        <SlideProductComponent products={productsData} />
+        <SlideProductComponent products={productsData} isSellerProduct={true} />
         <br /><br />
         <div style={{margin: '20px 30px'}}>
           <h2>DANH MỤC SẢN PHẨM</h2>
@@ -344,13 +344,13 @@ const HomePage = () => {
           </BrandProductName>
           <SlideBrandComponent brands={brandsData}/>
         </BrandProduct>
-        <img src={posterSupport} alt=""  style={TopHeader}/>
+          <img src={posterSupport} alt=""  style={TopHeader}/>
         <BestSeller>
           <h2>BEST SELLER</h2>
           <LayoutProductComponent ProductData={productSellerData} />
           <br />
           <div style={{textAlign: 'center'}}>
-            <a className='seeMore' href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xem thêm <img src={iconArrow} alt="" style={{fontSize: '16px',color: 'var(--orangin)', border: '2px solid var(--orangin)'}}/></a>
+            <a className='seeMore' href={"Products"}>Xem thêm <img src={iconArrow} alt="" style={{fontSize: '16px',color: 'var(--orangin)', border: '2px solid var(--orangin)'}}/></a>
           </div>
         </BestSeller>
       </Container>

@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent';
 import "./style.css";
-const SlideProductComponent = ({ products }) => {
+const SlideProductComponent = ({ products, isSellerProduct }) => {
   const settings = {  
     infinite: true, // Vòng lặp vô tận
     speed: 1000, // Tốc độ trượt
@@ -17,7 +17,7 @@ const SlideProductComponent = ({ products }) => {
       <Slider {...settings}>
         {products.map((product, index) => (
           <div key={index}>
-            <CardProductComponent key={product.id} product={product} />
+            <CardProductComponent key={product.id} product={product} isSellerProduct={isSellerProduct} />
           </div>
         ))}
       </Slider>

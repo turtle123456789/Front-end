@@ -41,6 +41,8 @@ h4{
   font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 120% */
+  margin: 0;
+
 }
 a{
   text-decoration: none;

@@ -3,6 +3,7 @@ import '../../index.css'
 import { Form } from "antd";
 export const Policy = styled.div`
     display: flex;
+    background: #FFF5F5;
     justify-content: space-evenly;
     div{
         max-width: 25% ;

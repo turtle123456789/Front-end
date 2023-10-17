@@ -1,6 +1,7 @@
 export const productsData = [
     {
       id: 1,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -14,6 +15,7 @@ export const productsData = [
     },
     {
       id: 2,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -22,11 +24,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 3,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -40,6 +42,7 @@ export const productsData = [
     },
     {
       id: 4,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -48,11 +51,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 5,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -66,6 +69,7 @@ export const productsData = [
     },
     {
       id: 6,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -74,11 +78,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 7,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -87,11 +91,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 8,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -100,11 +104,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 9,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -113,11 +117,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 10,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -126,11 +130,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 11,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -139,11 +143,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 12,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -152,11 +156,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 13,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -165,11 +169,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 14,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -178,11 +182,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 15,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -191,50 +195,50 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 16,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
-      name: 'Sản phẩm 2',
+      name: 'A',
       image: require('../assets/images/image 119 (16).webp'),
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 17,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
-      name: 'Sản phẩm 2',
+      name: 'Bas dsa d',
       image: require('../assets/images/image 119 (16).webp'),
       description: 'Mô tả sản phẩm 2',
-      originalPrice: 250000,
+      originalPrice: 25000000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 18,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
-      name: 'Sản phẩm 2',
+      name: 'c',
       image: require('../assets/images/image 119 (16).webp'),
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 19,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -243,11 +247,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 20,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -256,11 +260,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 21,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -269,11 +273,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 22,
+      Brand: 'LOREAL',
       sellQuantity: 52,
       quantity: 1114,
       type: 'eye',
@@ -282,11 +286,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 23,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -295,11 +299,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 24,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -308,11 +312,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 25,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -321,11 +325,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 26,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -334,11 +338,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 27,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -347,11 +351,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 28,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -360,11 +364,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 29,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -373,11 +377,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 30,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -386,11 +390,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 31,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -399,11 +403,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 32,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -412,11 +416,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 33,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -425,11 +429,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 34,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -438,11 +442,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 35,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -451,11 +455,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 36,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -464,11 +468,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 37,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -477,11 +481,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 38,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -490,11 +494,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 39,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -503,11 +507,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 40,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -516,11 +520,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 41,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -529,11 +533,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 42,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -542,11 +546,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 43,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -555,11 +559,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 44,
+      Brand: 'LOREAL',
       sellQuantity: 12,
       quantity: 1114,
       type: 'eye',
@@ -568,20 +572,19 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 45,
+      Brand: 'LOREAL',
       sellQuantity: 69,
       quantity: 1114,
       type: 'eye',
-      name: 'ádasadsfasfasdasdjisdjiojoi3ue923u923u93adgadsfagag',
+      name: 'ádasadsfasfasdsf lknaskldklasn landklnaklsdn kansdklnasdlk náld',
       image: require('../assets/images/image 119 (16).webp'),
-      description: 'Mô tả sản phẩm 2',
+      description: 'ádasgasgasgafasfasfsafasfsafaslfmasdaskdoasod mklmskldmklsdm lk k o k ok o o josj ojdosajdoa sj',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     // Thêm các sản phẩm khác nếu cần
@@ -589,6 +592,7 @@ export const productsData = [
   export const productSellerData = [
     {
       id: 1,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -602,6 +606,7 @@ export const productsData = [
     },
     {
       id: 2,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -610,11 +615,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 3,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -628,6 +633,7 @@ export const productsData = [
     },
     {
       id: 4,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -636,11 +642,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 5,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -654,6 +660,7 @@ export const productsData = [
     },
     {
       id: 6,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -662,11 +669,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 7,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -680,6 +687,7 @@ export const productsData = [
     },
     {
       id: 8,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -688,11 +696,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 9,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -706,6 +714,7 @@ export const productsData = [
     },
     {
       id: 10,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -714,11 +723,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 11,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -727,11 +736,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 12,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -740,11 +749,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 13,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -753,11 +762,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 14,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -766,11 +775,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 15,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -779,11 +788,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 16,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -792,11 +801,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 17,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'lip',
@@ -805,11 +814,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 18,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -823,6 +832,7 @@ export const productsData = [
     },
     {
       id: 19,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'face',
@@ -831,11 +841,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 22,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -844,11 +854,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 23,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -862,6 +872,7 @@ export const productsData = [
     },
     {
       id: 24,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -870,11 +881,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 25,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -888,6 +899,7 @@ export const productsData = [
     },
     {
       id: 26,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -896,11 +908,11 @@ export const productsData = [
       description: 'Mô tả sản phẩm 2',
       originalPrice: 250000,
       discountedPrice:4000,
-      discountPercentage: 20,
       gift: 'jsahbdjasbdkjhsdkjasdmabsd'
     },
     {
       id: 27,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -914,6 +926,7 @@ export const productsData = [
     },
     {
       id: 287,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',
@@ -927,6 +940,7 @@ export const productsData = [
     },
     {
       id: 1140,
+      Brand: 'LOREAL',
       sellQuantity: 10,
       quantity: 1114,
       type: 'eye',

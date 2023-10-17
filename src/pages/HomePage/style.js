@@ -38,7 +38,7 @@ export const CategoryMenuBenefits = styled.div`
     width: calc(100% - 350px);
     top: 0;
     right: ${(props) => (props.show ? '0' : '-100%')};
-    transition: right 0.5s ease;
+    
     animation: slide-in 1s ease forwards; // Thêm animation slide-in
     /* ... */
     
@@ -47,7 +47,7 @@ export const CategoryMenuBenefits = styled.div`
         right: -100%; // Vị trí ban đầu (điều này có thể điều chỉnh)
       }
       to {
-        right: 0; // Vị trí cuối cùng (điều chỉnh cho phù hợp)
+        right: 30px; // Vị trí cuối cùng (điều chỉnh cho phù hợp)
       }
     }
     span{

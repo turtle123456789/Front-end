@@ -42,6 +42,7 @@ const FooterComponent = () => {
                     <span>Liên hệ Hotline 1900 7101 để được tư vấn</span>
                 </div>
             </Policy>
+            <br /><br />
             <BodyFooter>
                 <div style={{maxWidth: '410px'}}>
                     <h4>Thông tin liên hệ</h4>

@@ -14,10 +14,8 @@ export const FormShip = styled.div`
     }
 `
 export const ProductName = styled.div`
-    margin-bottom: 10px;
 `
 export const ProductContent = styled.div`
-    margin-bottom: 10px;
     a{
         font-size: 16px;
     }

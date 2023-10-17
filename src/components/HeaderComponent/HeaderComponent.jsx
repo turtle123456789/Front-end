@@ -25,7 +25,7 @@ const HeaderComponent = () => {
           </Row>
           <MenuMain>
             <LinkFilter><IconMenu></IconMenu></LinkFilter>
-            <a href={"https://www.facebook.com/profile.php?id=100057094481241"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>
+            <a href={"/"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>
             <SearchProduct>
               <FormSearch >
                 <Input placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>

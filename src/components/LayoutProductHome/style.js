@@ -5,7 +5,5 @@ export const LayoutProduct = styled.div`
     flex-wrap: wrap;
     justify-content: space-evenly;
     max-width: 100%;
+    gap: 10px 5px;
 `
-export const paginationRight = {
-    float: 'right'
-};
