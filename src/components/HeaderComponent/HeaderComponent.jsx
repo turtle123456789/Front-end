@@ -1,7 +1,7 @@
 
 import React from 'react'
 import posterMain from '../../assets/images/posterMain.webp'
-import {MenuMain ,TopHeader ,IconMenu ,LinkFilter, ChooseUse, LogoShop, SearchProduct, IconContact} from './style'
+import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact} from './style'
 import logoMain from '../../assets/images/logoMain.png'
 import iconPhone from '../../assets/images/icon-telephone.svg'
 import iconHeart from '../../assets/images/icon-heart.svg'
@@ -14,6 +14,7 @@ import {
 } from '@ant-design/icons';
 import { Container } from '../ContainerComponent/ContainerComponent'
 import { Button, Col, Input, Row } from 'antd'
+import { Link } from 'react-router-dom'
 
 const HeaderComponent = () => {
 
@@ -24,7 +25,6 @@ const HeaderComponent = () => {
             <Col span={24}><img src={posterMain} alt="poster"  style={TopHeader}/></Col>
           </Row>
           <MenuMain>
-            <LinkFilter><IconMenu></IconMenu></LinkFilter>
             <a href={"/"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>
             <SearchProduct>
               <FormSearch >
@@ -32,11 +32,11 @@ const HeaderComponent = () => {
                 <Button type='primary' style={{height: '43px', width: '64px', background:'var(--pink)', borderRadius: '0 10px 10px 0'}}><SearchOutlined /></Button>
               </FormSearch>
               <ChooseUse>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Chăm sóc da</a>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem chống năng</a>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sale valentine</a>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xịt khoáng</a>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Fanya</a>
+                <Link to="/ProductsPage/chamsoc da">Chăm sóc da</Link>
+                <Link to="/ProductsPage/kemchongnang">Kem chống nắng</Link>
+                <Link to="/ProductsPage/salevalentine">Sale Valentine</Link>
+                <Link to="/ProductsPage/xitkhoang">Xịt khoáng</Link>
+                <Link to="/ProductsPage/fanya">Fanya</Link>
               </ChooseUse>
             </SearchProduct>
               <IconContact href={"https://www.facebook.com/profile.php?id=100057094481241"}>
@@ -46,12 +46,12 @@ const HeaderComponent = () => {
               <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
                 <img src={iconHeart} alt=""/>
               </a>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/Signin">
                 <img src={iconAccount} alt=""/>
-              </a>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              </Link>
+              <Link to="/CartPage">
                 <img src={iconShopCar} alt=""/>
-              </a>
+              </Link>
           </MenuMain>
         </Container>
     </div>

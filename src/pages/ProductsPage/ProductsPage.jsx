@@ -6,7 +6,15 @@ import LayoutProductHome from '../../components/LayoutProductHome/LayoutProductH
 import { productsData } from '../../Data/ProductData';
 import { Container } from '../../components/ContainerComponent/ContainerComponent';
 import './style.css';
+import { useParams } from 'react-router-dom';
 const ITEMS_PER_PAGE = 20
+const productTypes = {
+  'chamsocda': 'Chăm sóc da',
+  'kemchongnang': 'Kem chống nắng',
+  'salevalentine': 'Sale Valentine',
+  'xitkhoang': 'Xịt khoáng',
+  'fanya': 'Fanya',
+};
 const items1 = [
   {
     key: '1',
@@ -70,6 +78,10 @@ const items = [
   ]),
 ];
 const ProductsPage = () => {
+  const { type } = useParams();
+
+  // Determine the label based on the 'type' parameter
+  const selectedProductTypeLabel = productTypes[type] || 'Tất cả sản phẩm';
   const [mode] = useState('inline');
   const [theme] = useState('light');
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -183,6 +195,7 @@ const ProductsPage = () => {
   const [nameAzProduct, setNameAzProducts] = useState([]);
   const [nameZaProduct, setNameZaProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
+  
   return (
     <div>
       <Container>
@@ -197,8 +210,10 @@ const ProductsPage = () => {
             </Tabs>
           </Col>
           <Col span={6} pull={18} style={{textAlign: 'center'}}>
+            <div className="category">
               <h3>Danh mục</h3>
-              <h4>CHĂM SÓC TÓC & DA ĐẦU</h4>
+              <h4>{selectedProductTypeLabel}</h4>
+            </div>
               <div className='FillterPrice'>
                 <Menu
                   style={{

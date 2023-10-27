@@ -1,8 +1,10 @@
+import CartPage from "../pages/CartPage/CartPage";
 import HomePage from "../pages/HomePage/HomePage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import OderPage from "../pages/OderPage/OderPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
+import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
+import SigninPage from "../pages/SigninPage/SigninPage";
 
 export const routes = [
     {
@@ -21,10 +23,21 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/Oder',
-        page: OderPage,
+        path: '/CartPage',
+        page: CartPage,
         isShowHeader: true
     },
+    {
+        path: '/Signin',
+        page: SigninPage,
+        isShowHeader: true
+    },
+    {
+        path: '/Register',
+        page: RegistrationPage,
+        isShowHeader: true
+    },
+   
     {
         path: '*',
         page: NotFoundPage

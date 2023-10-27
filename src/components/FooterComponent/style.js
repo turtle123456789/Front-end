@@ -5,6 +5,7 @@ export const Policy = styled.div`
     display: flex;
     background: #FFF5F5;
     justify-content: space-evenly;
+    margin: 30px 0;
     div{
         max-width: 25% ;
         text-align: center;

@@ -29,6 +29,7 @@ h1{
 h2{
   font-size: 24px;
   margin: 0;
+  font-weight: 600;
 }
 h3{
   font-size: 14px;
@@ -61,4 +62,7 @@ a{
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+}
+li{
+  list-style: none;
 }

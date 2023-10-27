@@ -5,13 +5,13 @@ const CardTypeProductComponent = ({typeProduct}) => {
   return (
     <div>
         <TypeProduct>
-            <div class="type-products_img">
+            <div className="type-products_img">
                 <img src={typeProduct.image} alt=""/>
             </div>
-            <div class="type-products_name">
+            <div className="type-products_name">
                 <h3>{typeProduct.name}</h3>
             </div>
-            <div class="type-products_quantity">
+            <div className="type-products_quantity">
                 <span>{typeProduct.quantity} sản phẩm</span>
             </div>
         </TypeProduct>

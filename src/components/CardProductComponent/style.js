@@ -54,9 +54,12 @@ export const LevelOfLiking = styled.div`
         display: flex;
         align-items: center;
     }
+    .quantity{
+        display: flex;
+    }
     .quantity img{
         border-left: 2px solid var(--black);
-        padding-left: 10px;
+        padding: 0 10px;
     }
 `
 export const GiftSale = styled.div`

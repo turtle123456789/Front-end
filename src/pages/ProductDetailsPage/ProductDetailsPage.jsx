@@ -1,7 +1,7 @@
 import React , { useState }from 'react'
 import { Container } from '../../components/ContainerComponent/ContainerComponent'
-import {  ProductDetails, WatchProduct } from './style'
-import { Col, Row } from 'antd'
+import {  Choice, InforProduct, Parameters, ProductDetails, QuantityBuy, WatchProduct } from './style'
+import { Col, Rate, Row, Tabs } from 'antd'
 import Slider from 'react-slick';
 import img1 from '../../assets/images/ProductDetail (1).webp'
 import img2 from '../../assets/images/ProductDetail (2).webp'
@@ -12,7 +12,14 @@ import iconWhiteHeart from '../../assets/images/icon-heart.svg'
 import iconShopingCar from '../../assets/images/icon-shopping_cart.svg'
 import {  productsData } from '../../Data/ProductData'
 import { LevelOfLiking, ProductPrice } from '../../components/CardProductComponent/style';
-import { useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
+import {
+    MinusOutlined,
+    PlusOutlined,
+    ShoppingCartOutlined,
+    WalletOutlined,
+  } from '@ant-design/icons';
+import SlideProductComponent from '../../components/SlideProductComponent/SlideProductComponent';
 const ProductDetailsPage = ( ) => {
     const { productId } = useParams(); // Extract the product ID from the URL
     const [currentImage, setCurrentImage] = useState(img1);
@@ -20,6 +27,33 @@ const ProductDetailsPage = ( ) => {
     const product = productsData.find((item) => item.id === Number(productId));
     const percentage = Math.floor(((product.originalPrice - product.discountedPrice) / product.originalPrice) * 100);
     const save = (product.originalPrice - product.discountedPrice);
+    const [count, setCount] = useState(0);
+    const decreaseCount = () => {
+        if (count > 0) {
+          setCount(count - 1);
+        }
+      };
+    
+      const increaseCount = () => {
+        setCount(count + 1);
+      };
+    const onChange = (key) => {
+        console.log(key);
+      };
+    
+      const getRelatedProducts = () => {
+        // Thực hiện việc lọc sản phẩm liên quan dựa trên các tiêu chí của bạn.
+        // Ví dụ: Lọc sản phẩm cùng loại hoặc cùng thương hiệu.
+        const relatedProducts = productsData.filter((item) => {
+          // Thực hiện các điều kiện lọc tại đây, ví dụ:
+          return item.skintype === product.skintype || item.Brand === product.Brand;
+        });
+    
+        // Giới hạn danh sách sản phẩm liên quan thành 6 sản phẩm
+        return relatedProducts.slice(0, 6);
+      };
+    
+      const relatedProducts = getRelatedProducts(); 
     if (!product) {
       // Handle the case where the product with the given ID is not found
       return <div>Product not found</div>;
@@ -32,20 +66,76 @@ const ProductDetailsPage = ( ) => {
         autoplaySpeed: 2000,
         autoplay: true,
         cssEase: "linear",
-      };
-      
+    };
+    
 
-      const handleImageClick = (image) => {
-        setCurrentImage(image);
-      };
-      const formatNumber = (number) => {
+    const handleImageClick = (image) => {
+    setCurrentImage(image);
+    };
+    const formatNumber = (number) => {
         return new Intl.NumberFormat('vi-VN').format(number); // Chọn ngôn ngữ và quốc gia theo ý muốn
     };
+    const formattedInfor = {
+        __html: product.infor.split('\n').map((paragraph, index) => `<p key=${index}>${paragraph}</p>`).join(''),
+    };
+    const formattedInstruct = {
+        __html: product.instruct.split('\n').map((paragraph, index) => `<p key=${index}>${paragraph}</p>`).join(''),
+    };
+    const items = [
+        {
+          key: '1',
+          label: 'Thông tin sản phẩm',
+          children: (
+            <div>
+              <h4>Thông tin sản phẩm</h4>
+              <InforProduct dangerouslySetInnerHTML={formattedInfor} ></InforProduct>,
+            </div>
+          )
+        },
+        {
+          key: '2',
+          label: 'Thông số sản phẩm',
+          children: (
+            <div>
+              <h4>Thông số sản phẩm</h4>
+              <Parameters>
+                <div className="name">
+                    <li>Barcode</li>
+                    <li>Thương hiện</li>
+                    <li>Xuất xứ</li>
+                    <li>Loại da</li>
+                    <li>Giới tính</li>
+                </div>
+                <div className="content">
+                    <li>{product.barcode}</li>
+                    <li>{product.Brand}</li>
+                    <li>{product.origin}</li>
+                    <li>{product.skintype}</li>
+                    <li>{product.sex}</li>
+                </div>
+              </Parameters>
+            </div>
+          ),
+        },
+        {
+          key: '3',
+          label: 'Hướng dẫn sử dụng',
+          children: (
+            <div>
+                <h4>Hướng Dẫn Sử Dụng</h4>
+                <InforProduct dangerouslySetInnerHTML={formattedInstruct} ></InforProduct>,
+            </div>
+          ),
+        },
+      ];
   return (
     <div>
         <Container>
             <ProductDetails>
-                <p className="AddrestProduct">Trang chủ  /  Nước tẩy trang  /  Nước Tẩy Trang Làm Sạch Sâu 3 In 1 L'oreal Micellar Water Deep Cleansing</p>
+            <p className="AddrestProduct">
+              <Link to="/">Trang chủ</Link> /{' '}
+              <Link to={`/ProductsPage/${product.type}`}>{product.type}</Link> / {product.name}
+            </p>
                 <Row>
                     <Col span={11}>
                         <WatchProduct>
@@ -76,20 +166,14 @@ const ProductDetailsPage = ( ) => {
                         <h4>{product.name}</h4>
                         <LevelOfLiking>
                             <div className="review">
-                                <svg id="reviewStar" xmlns="http://www.w3.org/2000/svg" width="53" height="11" viewBox="0 0 53 11" fill="none">
-                                <path d="M5.34561 0.0715332L6.54578 3.76526H10.4296L7.28752 6.04811L8.48769 9.74184L5.34561 7.45899L2.20354 9.74184L3.40371 6.04811L0.261633 3.76526H4.14545L5.34561 0.0715332Z" fill="#768134"/>
-                                <path d="M15.6093 0.0715332L16.8094 3.76526H20.6933L17.5512 6.04811L18.7514 9.74184L15.6093 7.45899L12.4672 9.74184L13.6674 6.04811L10.5253 3.76526H14.4091L15.6093 0.0715332Z" fill="#768134"/>
-                                <path d="M26.3007 0.0715332L27.5009 3.76526H31.3847L28.2426 6.04811L29.4428 9.74184L26.3007 7.45899L23.1586 9.74184L24.3588 6.04811L21.2167 3.76526H25.1005L26.3007 0.0715332Z" fill="#768134"/>
-                                <path d="M36.6708 0.0715332L37.871 3.76526H41.7548L38.6127 6.04811L39.8129 9.74184L36.6708 7.45899L33.5287 9.74184L34.7289 6.04811L31.5868 3.76526H35.4706L36.6708 0.0715332Z" fill="#768134"/>
-                                <path d="M47.3622 0.0715332L48.5624 3.76526H52.4462L49.3041 6.04811L50.5043 9.74184L47.3622 7.45899L44.2201 9.74184L45.4203 6.04811L42.2782 3.76526H46.162L47.3622 0.0715332Z" fill="#DDD9D9"/>
-                                </svg>
+                                <Rate allowHalf defaultValue={2.5} />
                                 <div className="quantity">
                                 <img src={iconShopingCar} alt=""/>
                                 <span className="quantityProduct">{product.quantity}</span>
                                 </div>
                             </div>
-
                         </LevelOfLiking>
+                        <br />
                         <ProductPrice>
                             <div>
                                 <span className="originalPrice" style={{fontSize: '35px'}}>{formatNumber(product.originalPrice)} đ</span>
@@ -98,10 +182,28 @@ const ProductDetailsPage = ( ) => {
                             <span className='discountPercentage'>{percentage}%</span>
                         </ProductPrice>
                         <p style={{margin: '0' }}>(Tiết kiệm: <span style={{color: '#6B1D14', fontWeight: '600'}}>{formatNumber(save)} đ</span>)</p>
-
+                        <br /> <br />
+                        <span style={{fontWeight: 600}}>Số lượng:</span>
+                        <br /><br />
+                        <QuantityBuy>
+                            <button onClick={decreaseCount}><MinusOutlined/></button>
+                            <span className="count">{count}</span>
+                            <button onClick={increaseCount}><PlusOutlined/></button>
+                        </QuantityBuy>
+                        <br /><br /><br /><br />
+                        <Choice>
+                            <button className="addCart">
+                            <ShoppingCartOutlined /> Thêm vào giỏ hàng
+                            </button>
+                            <button className="buyNow">
+                            <WalletOutlined /> Mua ngay
+                            </button>
+                        </Choice>
                     </Col>
                 </Row>
-
+                <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+                <h4>Các sản phẩm liên quan</h4>
+                <SlideProductComponent products={relatedProducts}/>
             </ProductDetails>
         </Container>
     </div>
