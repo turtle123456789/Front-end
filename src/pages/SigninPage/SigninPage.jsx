@@ -1,25 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from '../../components/ContainerComponent/ContainerComponent'
 import { LayoutSigin, MethodRegister } from './style'
 import { Col, Form, Row,Checkbox, Input } from 'antd'
 import iconFace from '../../assets/images/iconFace.png'
 import iconGoogle from '../../assets/images/iconGoogle.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as UserService from '../../services/UserService'
 import { useMutationHooks } from '../../hooks/useMutationHook'
+import {useDispatch} from 'react-redux'
+import { jwtDecode } from "jwt-decode";
+import { updateUser } from '../../redux/slides/userSlide'
 const SigninPage = () => {
+  const navigate = useNavigate()
+  const disPatch = useDispatch();
   const mutation = useMutationHooks(
     data => UserService.loginUser(data)
   )
-  // const {data}=mutation
-  console.log('mutation', mutation)
+  const {data,isError,isSuccess} = mutation
+  useEffect(()=>{
+    if(isSuccess){
+      navigate('/')
+      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+      if(data?.access_token) {
+        const decoded = jwtDecode(data?.access_token);
+        console.log('decoded', decoded)
+        if(decoded?.id){
+          handleGetDetailsUser(decoded?.id, data?.access_token)
+        }
+      }
+    }
+  },[isSuccess,navigate])
+  const handleGetDetailsUser = async(id,token) => {
+    const res = await UserService.GetDetailUser(id,token)
+    console.log('res', res)
+    disPatch(updateUser({...res?.data, access_token: token}))
+  }
   const onFinish = (values) => {
-    console.log('sign-in:', values.password, values.email);
     const email = values.email
     const password = values.password
     mutation.mutate({
       email,
-      password
+      password,
     }
     );
     // Add your login logic here, for example, call the mutation function.
@@ -107,8 +128,8 @@ const SigninPage = () => {
                   </MethodRegister>
                   
                     <div style={{textAlign: 'center'}}>
-                      {/* {data?.status === 'ERR' && <span>{data?.message}</span>} */}
-                      <button type="primary" htmlType="submit" id='btnSignin'>Đăng nhập</button>
+                      {data?.status === 'ERR' && <span style={{color: 'red'}}>{data?.message}</span>}
+                      <button button type="primary" htmlType="submit" id='btnSignin'>Đăng nhập</button>
                     </div>
                   </Form>
                 </Col>

@@ -15,9 +15,11 @@ import {
 import { Container } from '../ContainerComponent/ContainerComponent'
 import { Button, Col, Input, Row } from 'antd'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const HeaderComponent = () => {
-
+  const user = useSelector((state) => state.user)
+  console.log('user', user)
   return (
     <div>
         <Container>
@@ -43,11 +45,15 @@ const HeaderComponent = () => {
                 <img src={iconPhone} alt=""/>
                 <span style={{color: 'var(--black)', lineHeight: '30px', fontSize: '14px',borderRight: '1px solid var(--black)',padding:'0 30px'}}>1900 7101</span>
               </IconContact>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-                <img src={iconHeart} alt=""/>
-              </a>
-              <Link to="/Signin">
+              <Link to="/Signin" style={{display: 'flex', alignItems: 'center'}}>
                 <img src={iconAccount} alt=""/>
+                {user?.name ? (
+                  <span style={{marginLeft: '5px',fontSize: '14px'}}>{user.name}</span>
+                ) : (
+                  <div>
+                    <span id='nameUser' style={{marginLeft: '5px',fontSize: '14px'}}>Đăng nhập/ Đăng kí</span>
+                  </div>
+                )}
               </Link>
               <Link to="/CartPage">
                 <img src={iconShopCar} alt=""/>

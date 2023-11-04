@@ -1,20 +1,30 @@
-  import React, { Fragment } from 'react'
+  import React, { Fragment, useEffect } from 'react'
   import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
   import { routes } from './routes'
   import DefaultComponent from './components/DefaultComponent/DefaultComponent'
-  import axios from 'axios'
-  import { useQuery } from '@tanstack/react-query'
+  import { isJsonString } from './utils'
+  import {jwtDecode} from "jwt-decode";
+  import {useDispatch} from 'react-redux'
+  import { updateUser } from './redux/slides/userSlide'
+  import * as UserService from './services/UserService'
   function App() {
-
-    // useEffect(() => {
-    //   fetchApi()
-    // },[])
-    const fetchApi = async () => {
-      const res = axios.get(`${process.env.REACT_APP_API_URL}/product/get-all`)
-      return res.data
+    const disPatch = useDispatch();
+    useEffect(() => {
+      let storageData = localStorage.getItem('access_token')
+      if(storageData && isJsonString(storageData)){
+        storageData = JSON.parse(storageData)
+        const decoded = jwtDecode(storageData);
+        if(decoded?.id){
+          handleGetDetailsUser(decoded?.id, storageData)
+        }
+      }
+      console.log('storageData', storageData)
+    },[])
+    const handleGetDetailsUser = async(id,token) => {
+      const res = await UserService.GetDetailUser(id,token)
+      console.log('res', res)
+      disPatch(updateUser({...res?.data, access_token: token}))
     }
-    const query = useQuery({ queryKey: ['todos'], queryFn:fetchApi })
-    console.log('query', query)
     return (
       <div>
           <Router>
