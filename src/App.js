@@ -10,19 +10,37 @@
   function App() {
     const disPatch = useDispatch();
     useEffect(() => {
+      const { decoded, storageData} = handleDecoded()
+      if(decoded?.id){
+        handleGetDetailsUser(decoded?.id, storageData)
+      }
+    },[])
+
+    const handleDecoded = () => {
       let storageData = localStorage.getItem('access_token')
+      let decoded = {}
       if(storageData && isJsonString(storageData)){
         storageData = JSON.parse(storageData)
-        const decoded = jwtDecode(storageData);
-        if(decoded?.id){
-          handleGetDetailsUser(decoded?.id, storageData)
+        decoded = jwtDecode(storageData);
         }
+        
+        return {decoded,storageData}
+      } 
+      UserService.axiosJWT.interceptors.request.use(async (config) => {
+      // Do something before request is sent
+      const currentTime = new Date()
+      const { decoded } = handleDecoded()
+      if(decoded?.exp < currentTime.getTime() / 1000){
+        const data = await UserService.refreshToken()
+        config.headers['token'] = `Bearer ${data?.access_token}`
       }
-      console.log('storageData', storageData)
-    },[])
+      return config;
+    }, (err) => {
+      // Do something with request error
+      return Promise.reject(err);
+    });
     const handleGetDetailsUser = async(id,token) => {
-      const res = await UserService.GetDetailUser(id,token)
-      console.log('res', res)
+      const res = await UserService.getDetailUser(id,token)
       disPatch(updateUser({...res?.data, access_token: token}))
     }
     return (

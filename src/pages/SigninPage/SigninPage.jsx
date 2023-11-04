@@ -23,7 +23,6 @@ const SigninPage = () => {
       localStorage.setItem('access_token', JSON.stringify(data?.access_token))
       if(data?.access_token) {
         const decoded = jwtDecode(data?.access_token);
-        console.log('decoded', decoded)
         if(decoded?.id){
           handleGetDetailsUser(decoded?.id, data?.access_token)
         }
@@ -31,8 +30,7 @@ const SigninPage = () => {
     }
   },[isSuccess,navigate])
   const handleGetDetailsUser = async(id,token) => {
-    const res = await UserService.GetDetailUser(id,token)
-    console.log('res', res)
+    const res = await UserService.getDetailUser(id,token)
     disPatch(updateUser({...res?.data, access_token: token}))
   }
   const onFinish = (values) => {

@@ -4,5 +4,5 @@ export const isJsonString = (data) => {
     } catch (error){
         return  false
     }
-    return
+    return true
 }
