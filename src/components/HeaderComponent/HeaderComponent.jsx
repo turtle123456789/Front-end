@@ -1,7 +1,7 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import posterMain from '../../assets/images/posterMain.webp'
-import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout} from './style'
+import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout, AccountUser} from './style'
 import logoMain from '../../assets/images/logoMain.png'
 import iconPhone from '../../assets/images/icon-telephone.svg'
 import iconAccount from '../../assets/images/icon-login.svg'
@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 import { Container } from '../ContainerComponent/ContainerComponent'
 import { Button, Col, Input, Popover, Row } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {useDispatch} from 'react-redux'
 import * as UserService from '../../services/UserService'
@@ -21,14 +21,20 @@ import { resetUser } from '../../redux/slides/userSlide'
 const HeaderComponent = () => {
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
+  const [userName, setUserName] = useState('')
+  const [userAvatar, setUserAvatar] = useState('')
   const handleLogout = async() =>{
     await UserService.logOutUser
     dispatch(resetUser())
   }
+  useEffect(() => {
+    setUserName(user?.name)
+    setUserAvatar(user?.avatar)
+  }, [user?.name, user?.avatar])
   const content = (
     <div>
       <Logout onClick={handleLogout}>Đăng xuất</Logout>
-      <Logout><Link to="/profile-user">Thông tin người dùng</Link></Logout>
+      <Link to="/profile-user"><Logout>Thông tin người dùng</Logout></Link>
     </div>
   );
   return (
@@ -56,18 +62,29 @@ const HeaderComponent = () => {
                 <img src={iconPhone} alt=""/>
                 <span style={{color: 'var(--black)', lineHeight: '30px', fontSize: '14px',borderRight: '1px solid var(--black)',padding:'0 30px'}}>1900 7101</span>
               </IconContact>
-              <Link to="/Signin" style={{display: 'flex', alignItems: 'center'}}>
-                <img src={iconAccount} alt=""/>
-                {user?.name ? (
+              <AccountUser>
+                <Link to="/Signin" style={{display: 'flex', alignItems: 'center'}}>
+                  {userAvatar ? (
+                    <img src={userAvatar} alt="avatar" style={{
+                      height: '30px',
+                      width: '30px',
+                      borderRadius: '50%',
+                      objectFit: 'cover'
+                    }} />
+                  ) : (
+                    <img src={iconAccount} alt=""/>
+                  )}
+                </Link>
+                {user?.access_token ? (
                   <Popover content={content} trigger="click">
-                    <span style={{marginLeft: '5px',fontSize: '14px'}}>{user.name}</span>
+                    <span style={{marginLeft: '5px',fontSize: '14px'}}>{userName?.length ? userName : user?.email}</span>
                   </Popover>
                 ) : (
                   <div>
                     <span id='nameUser' style={{marginLeft: '5px',fontSize: '14px'}}>Đăng nhập/ Đăng kí</span>
                   </div>
                 )}
-              </Link>
+              </AccountUser>
               <Link to="/CartPage">
                 <img src={iconShopCar} alt=""/>
               </Link>

@@ -87,3 +87,10 @@ export const Logout = styled.p`
         color: var(--pink);
     }
 `
+export const AccountUser = styled.div`
+    display: flex;
+    align-items: center;
+    span{
+        cursor: pointer;
+    }
+`

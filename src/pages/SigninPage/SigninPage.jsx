@@ -12,7 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import { updateUser } from '../../redux/slides/userSlide'
 const SigninPage = () => {
   const navigate = useNavigate();
-  const disPatch = useDispatch();
+  const dispatch = useDispatch();
   const mutation = useMutationHooks(
     data => UserService.loginUser(data)
   )
@@ -31,7 +31,7 @@ const SigninPage = () => {
   },[isSuccess,navigate])
   const handleGetDetailsUser = async(id,token) => {
     const res = await UserService.getDetailUser(id,token)
-    disPatch(updateUser({...res?.data, access_token: token}))
+    dispatch(updateUser({...res?.data, access_token: token}))
   }
   const onFinish = (values) => {
     const email = values.email

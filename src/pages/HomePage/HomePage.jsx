@@ -31,24 +31,33 @@ import { brandsData } from '../../Data/BrandData'
 import { TopHeader } from '../../components/HeaderComponent/style'
 import LayoutProductComponent from '../../components/LayoutProductComponent/LayoutProductComponent'
 import LayoutTypeProductComponent from '../../components/LayoutTypeProductComponent/LayoutTypeProductComponent'
+import { useQuery } from '@tanstack/react-query'
+import * as ProductService from '../../services/ProductService'
 const HomePage = () => {
+  const fetchProductAll = async () =>{
+    await ProductService.getAllProduct()
+  }
+  const { data } = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchProductAll,
+  });
+  console.log('data', data)
   const [activeIndex, setActiveIndex] = useState(null);
-  const [menuTimeout, setMenuTimeout] = useState(null); // Thêm state để quản lý setTimeout
-
+  const [menuTimeout, setMenuTimeout] = useState(null); 
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
-    clearTimeout(menuTimeout); // Hủy bỏ setTimeout nếu có
+    clearTimeout(menuTimeout); 
   };
   const handleMouseLeave = () => {
-    // Sử dụng setTimeout để chờ trước khi ẩn CategoryMenuBenefits
+
     const timeout = setTimeout(() => {
       setActiveIndex(null);
-    }, 500); // Chờ 0.5 giây trước khi ẩn
+    }, 500);
 
-    setMenuTimeout(timeout); // Lưu giá trị setTimeout vào state
+    setMenuTimeout(timeout);
   };
   useEffect(() => {
-    // Hủy bỏ setTimeout nếu component bị unmount
+
     return () => {
       clearTimeout(menuTimeout);
     };
