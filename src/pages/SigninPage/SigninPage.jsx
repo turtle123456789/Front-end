@@ -11,7 +11,7 @@ import {useDispatch} from 'react-redux'
 import { jwtDecode } from "jwt-decode";
 import { updateUser } from '../../redux/slides/userSlide'
 const SigninPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const disPatch = useDispatch();
   const mutation = useMutationHooks(
     data => UserService.loginUser(data)

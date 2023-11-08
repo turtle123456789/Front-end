@@ -1,10 +1,9 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import posterMain from '../../assets/images/posterMain.webp'
-import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact} from './style'
+import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout} from './style'
 import logoMain from '../../assets/images/logoMain.png'
 import iconPhone from '../../assets/images/icon-telephone.svg'
-import iconHeart from '../../assets/images/icon-heart.svg'
 import iconAccount from '../../assets/images/icon-login.svg'
 import iconShopCar from '../../assets/images/icon-shopping_cart.svg'
 import { FormSearch } from './style'
@@ -13,13 +12,25 @@ import {
   SearchOutlined
 } from '@ant-design/icons';
 import { Container } from '../ContainerComponent/ContainerComponent'
-import { Button, Col, Input, Row } from 'antd'
-import { Link } from 'react-router-dom'
+import { Button, Col, Input, Popover, Row } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
+import {useDispatch} from 'react-redux'
+import * as UserService from '../../services/UserService'
+import { resetUser } from '../../redux/slides/userSlide'
 const HeaderComponent = () => {
   const user = useSelector((state) => state.user)
-  console.log('user', user)
+  const dispatch = useDispatch()
+  const handleLogout = async() =>{
+    await UserService.logOutUser
+    dispatch(resetUser())
+  }
+  const content = (
+    <div>
+      <Logout onClick={handleLogout}>Đăng xuất</Logout>
+      <Logout><Link to="/profile-user">Thông tin người dùng</Link></Logout>
+    </div>
+  );
   return (
     <div>
         <Container>
@@ -48,7 +59,9 @@ const HeaderComponent = () => {
               <Link to="/Signin" style={{display: 'flex', alignItems: 'center'}}>
                 <img src={iconAccount} alt=""/>
                 {user?.name ? (
-                  <span style={{marginLeft: '5px',fontSize: '14px'}}>{user.name}</span>
+                  <Popover content={content} trigger="click">
+                    <span style={{marginLeft: '5px',fontSize: '14px'}}>{user.name}</span>
+                  </Popover>
                 ) : (
                   <div>
                     <span id='nameUser' style={{marginLeft: '5px',fontSize: '14px'}}>Đăng nhập/ Đăng kí</span>

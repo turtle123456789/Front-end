@@ -80,3 +80,10 @@ export const FormSearch = styled(Form)`
 export const IconContact = styled.a`
     display: flex;
 `
+export const Logout = styled.p`
+    cursor: pointer;
+    font-weight: 600;
+    &:hover{
+        color: var(--pink);
+    }
+`
