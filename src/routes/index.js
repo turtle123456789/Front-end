@@ -47,7 +47,7 @@ export const routes = [
     {
         path: '/system/admin',
         page: AdminPage,
-        isShowHeader: true,
+        isShowHeader: false,
         isPrivate: true
     },
     
