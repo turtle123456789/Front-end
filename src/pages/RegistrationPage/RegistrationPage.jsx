@@ -19,7 +19,8 @@ const RegistrationPage = () => {
     navigate('/Signin')
   }, [navigate])
   useEffect(()=>{
-    if(isSuccess){
+    if(isSuccess && data?.status==="OK"){
+      console.log('data.status', data?.status)
       message.success()
       setTimeout(() => {
         handleNavigateSignIn();

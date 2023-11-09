@@ -33,8 +33,11 @@ const HeaderComponent = () => {
   }, [user?.name, user?.avatar])
   const content = (
     <div>
-      <Logout onClick={handleLogout}>Đăng xuất</Logout>
-      <Link to="/profile-user"><Logout>Thông tin người dùng</Logout></Link>
+        <Logout onClick={handleLogout}>Đăng xuất</Logout>
+        <Link to="/profile-user"><Logout>Thông tin người dùng</Logout></Link>
+        {user?.isAdmin && (
+          <Link to="/system/admin"><Logout>Quản lý hệ thống</Logout></Link>
+        )}
     </div>
   );
   return (

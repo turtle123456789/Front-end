@@ -48,7 +48,7 @@ const ProfilePage = () => {
     }, [isSuccess, isError])
 
     const handleGetDetailsUser = async (id, token) => {
-        const res = await UserService.getDetailUser(id, token)
+        const res = await UserService.getDetailsUser(id, token)
         dispatch(updateUser({ ...res?.data, access_token: token }))
     }
 

@@ -41,7 +41,7 @@ function App() {
     return Promise.reject(err);
   });
   const handleGetDetailsUser = async(id,token) => {
-    const res = await UserService.getDetailUser(id,token)
+    const res = await UserService.getDetailsUser(id,token)
     disPatch(updateUser({...res?.data, access_token: token}))
   }
   return (
