@@ -125,15 +125,8 @@ export const BrandProductName = styled.div`
 export const BestSeller = styled.div`
     margin: 20px 30px;
     position: relative;
-    display: block;
-    .seeMore{
-        font-size: 16px;
-        color: var(--orange);
-        border-radius: 10px;
-        border: 2px solid var(--orange);
-        padding: 5px 20px;
-    }
-    .seeMore:hover{
-        opacity: 0.8;
-    }
-`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    `

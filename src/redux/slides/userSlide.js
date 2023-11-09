@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, isAction } from '@reduxjs/toolkit'
 
 const initialState = {
   name: '',
@@ -8,6 +8,7 @@ const initialState = {
   avatar: '',
   access_token: '',
   id: '',
+  isAdmin : false
 }
 
 export const userSlice = createSlice({
@@ -15,7 +16,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     updateUser:(state,action) => {
-        const{ name = '', email = '', phone = '', address = '', avatar = '', access_token = '', _id = ''} = action.payload
+        const{ name = '', email = '', phone = '', address = '', avatar = '', access_token = '', _id = '',isAdmin} = action.payload
         state.name = name;
         state.email = email;
         state.id = _id;
@@ -23,6 +24,7 @@ export const userSlice = createSlice({
         state.address = address;
         state.avatar = avatar;
         state.access_token = access_token;
+        state.isAdmin = isAdmin;
     },
     resetUser:(state) => {
       state.name = '';
@@ -32,6 +34,8 @@ export const userSlice = createSlice({
       state.address = '';
       state.avatar = '';
       state.access_token = '';
+      state.access_token = false;
+      
   },
   },
 })

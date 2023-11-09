@@ -33,15 +33,15 @@ import LayoutProductComponent from '../../components/LayoutProductComponent/Layo
 import LayoutTypeProductComponent from '../../components/LayoutTypeProductComponent/LayoutTypeProductComponent'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
+import "./style.css";
 const HomePage = () => {
   const fetchProductAll = async () =>{
-    await ProductService.getAllProduct()
+    const res = await ProductService.getAllProduct()
+    return res
   }
-  const { data } = useQuery({
-    queryKey: ['products'],
-    queryFn: fetchProductAll,
-  });
-  console.log('data', data)
+  const {data: products}= useQuery(['products'], fetchProductAll,{retry: 3,retryDelay: 1000})
+  console.log('data', products)
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuTimeout, setMenuTimeout] = useState(null); 
   const handleMouseEnter = (index) => {
@@ -62,6 +62,8 @@ const HomePage = () => {
       clearTimeout(menuTimeout);
     };
   }, [menuTimeout]);
+  const [width, setWidth] = useState(1476);
+  const maxProductsToShow = 10;
   return (
     <div>
       <Container>
@@ -353,15 +355,65 @@ const HomePage = () => {
           </BrandProductName>
           <SlideBrandComponent brands={brandsData}/>
         </BrandProduct>
-          <img src={posterSupport} alt=""  style={TopHeader}/>
-        <BestSeller>
+        <img src={posterSupport} alt=""  style={TopHeader}/>
+        <div style={{position: 'relative' ,margin: '20px 30px'}}>
           <h2>BEST SELLER</h2>
-          <LayoutProductComponent ProductData={productSellerData} />
-          <br />
-          <div style={{textAlign: 'center'}}>
-            <a className='seeMore' href={"Products"}>Xem thêm <img src={iconArrow} alt="" style={{fontSize: '16px',color: 'var(--orangin)', border: '2px solid var(--orangin)'}}/></a>
+          <div className="groupButton">
+            <button
+            className= 'button'
+            onClick={() => {
+            
+              setWidth(1476);
+            }}
+          >
+            Trang điểm môi
+            </button>
+            <button
+              className= 'button'
+              onClick={() => {
+              
+                setWidth(1476);
+
+              }}
+            >
+              Trang điểm mắt
+            </button>
+            <button
+              className= 'button'
+              onClick={() => {
+              
+                setWidth(1476);
+
+              }}
+            >
+              Trang điểm mặt
+            </button>
           </div>
+        </div>
+
+        <BestSeller>
+          {products?.data?.map((product) => {
+              return (
+                <LayoutProductComponent 
+                  key={product._id}
+                  countInStock={product.countInStock}
+                  description={product.description}
+                  image={product.image}
+                  name={product.name}
+                  price={product.price}
+                  rating={product.rating}
+                  type={product.type}
+                  selled={product.selled}
+                  discount={product.discount}
+                  id={product._id}
+                />
+              )
+            })}
+          <br />
         </BestSeller>
+        <div style={{textAlign: 'center'}}>
+          <a className='seeMore' href={"Products"}>Xem thêm <img src={iconArrow} alt="" style={{fontSize: '16px',color: 'var(--orangin)', border: '2px solid var(--orangin)'}}/></a>
+        </div>
       </Container>
     </div>
   )
