@@ -19,7 +19,6 @@ const AdminProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowSelected, setRowSelected] = useState('')
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false);
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
   const user = useSelector((state) => state?.user)
   const searchInput = useRef(null);
@@ -33,6 +32,7 @@ const AdminProduct = () => {
     countInStock: '',
     newType: '',
     discount: '',
+    gift: ''
   })
   const [stateProduct, setStateProduct] = useState(inittial())
   const [stateProductDetails, setStateProductDetails] = useState(inittial())
@@ -47,7 +47,7 @@ const AdminProduct = () => {
         rating,
         image,
         type,
-        countInStock,discount } = data
+        countInStock,discount,gift } = data
       const res = ProductService.createProduct({
         name,
         price,
@@ -56,7 +56,8 @@ const AdminProduct = () => {
         image,
         type,
         countInStock,
-        discount
+        discount,
+        gift
       })
       return res
     }
@@ -113,7 +114,8 @@ const AdminProduct = () => {
         image: res?.data?.image,
         type: res?.data?.type,
         countInStock: res?.data?.countInStock,
-        discount: res?.data?.discount
+        discount: res?.data?.discount,
+        gift: res?.data?.gift
       })
     }
   }
@@ -149,7 +151,7 @@ const AdminProduct = () => {
     return res
   }
 
-  const { data, isError } = mutation
+  const { data,isSuccess, isError } = mutation
   const { data: dataUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
   const { data: dataDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
   const { data: dataDeletedMany, isSuccess: isSuccessDelectedMany, isError: isErrorDeletedMany } = mutationDeletedMany
@@ -157,7 +159,7 @@ const AdminProduct = () => {
 
   const queryProduct = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
   const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
-  const { data: products } = queryProduct
+  const { isLoading: isLoadingProducts, data: products } = queryProduct
   const renderAction = () => {
     return (
       <div>
@@ -235,20 +237,7 @@ const AdminProduct = () => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
-    // render: (text) =>
-    //   searchedColumn === dataIndex ? (
-    //     // <Highlighter
-    //     //   highlightStyle={{
-    //     //     backgroundColor: '#ffc069',
-    //     //     padding: 0,
-    //     //   }}
-    //     //   searchWords={[searchText]}
-    //     //   autoEscape
-    //     //   textToHighlight={text ? text.toString() : ''}
-    //     // />
-    //   ) : (
-    //     text
-    //   ),
+
   });
 
 
@@ -265,19 +254,19 @@ const AdminProduct = () => {
       sorter: (a, b) => a.price - b.price,
       filters: [
         {
-          text: '>= 50',
+          text: '>= 5000',
           value: '>=',
         },
         {
-          text: '<= 50',
+          text: '<= 5000',
           value: '<=',
         }
       ],
       onFilter: (value, record) => {
         if (value === '>=') {
-          return record.price >= 50
+          return record.price >= 5000
         }
-        return record.price <= 50
+        return record.price <= 5000
       },
     },
     {
@@ -286,19 +275,19 @@ const AdminProduct = () => {
       sorter: (a, b) => a.rating - b.rating,
       filters: [
         {
-          text: '>= 3',
+          text: '>= 5',
           value: '>=',
         },
         {
-          text: '<= 3',
+          text: '<= 5',
           value: '<=',
         }
       ],
       onFilter: (value, record) => {
         if (value === '>=') {
-          return Number(record.rating) >= 3
+          return Number(record.rating) >= 5
         }
-        return Number(record.rating) <= 3
+        return Number(record.rating) <= 5
       },
     },
     {
@@ -388,6 +377,7 @@ const AdminProduct = () => {
       type: '',
       countInStock: '',
       discount: '',
+      gift: ''
     })
     form.resetFields()
   };
@@ -401,7 +391,8 @@ const AdminProduct = () => {
       image: stateProduct.image,
       type: stateProduct.type === 'add_type' ? stateProduct.newType : stateProduct.type,
       countInStock: stateProduct.countInStock,
-      discount: stateProduct.discount
+      discount: stateProduct.discount,
+      gift: stateProduct.gift
     }
     mutation.mutate(params, {
       onSettled: () => {
@@ -467,7 +458,7 @@ const AdminProduct = () => {
         <Button style={{ height: '150px', width: '150px', borderRadius: '6px', borderStyle: 'dashed' }} onClick={() => setIsModalOpen(true)}><PlusOutlined style={{ fontSize: '60px' }} /></Button>
       </div>
       <div style={{ marginTop: '20px' }}>
-        <TableComponent handleDelteMany={handleDelteManyProducts} columns={columns} data={dataTable} onRow={(record, rowIndex) => {
+        <TableComponent handleDelteMany={handleDelteManyProducts} columns={columns} isLoading={isLoadingProducts} data={dataTable} onRow={(record, rowIndex) => {
           return {
             onClick: event => {
               setRowSelected(record._id)
@@ -476,104 +467,112 @@ const AdminProduct = () => {
         }} />
       </div>
       <ModalComponent forceRender title="Tạo sản phẩm" open={isModalOpen} onCancel={handleCancel} footer={null}>
-        <Form
-        name="basic"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 18 }}
-        onFinish={onFinish}
-        autoComplete="on"
-        form={form}
-        >
-        <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: 'Please input your name!' }]}
-        >
-            <InputComponent value={stateProduct['name']} onChange={handleOnchange} name="name" />
-        </Form.Item>
-
-        <Form.Item
-            label="Type"
-            name="type"
-            rules={[{ required: true, message: 'Please input your type!' }]}
-        >
-            <Select
-            name="type"
-            // defaultValue="lucy"
-            // style={{ width: 120 }}
-            value={stateProduct.type}
-            onChange={handleChangeSelect}
-            options={renderOptions(typeProduct?.data?.data)}
-            />
-        </Form.Item>
-        {stateProduct.type === 'add_type' && (
+          <Form
+            name="basic"
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
+            onFinish={onFinish}
+            autoComplete="on"
+            form={form}
+          >
             <Form.Item
-            label='New type'
-            name="newType"
-            rules={[{ required: true, message: 'Please input your type!' }]}
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: 'Please input your name!' }]}
             >
-            <InputComponent value={stateProduct.newType} onChange={handleOnchange} name="newType" />
+              <InputComponent value={stateProduct['name']} onChange={handleOnchange} name="name" />
             </Form.Item>
-        )}
-        <Form.Item
-            label="Count inStock"
-            name="countInStock"
-            rules={[{ required: true, message: 'Please input your count inStock!' }]}
-        >
-            <InputComponent value={stateProduct.countInStock} onChange={handleOnchange} name="countInStock" />
-        </Form.Item>
-        <Form.Item
-            label="Price"
-            name="price"
-            rules={[{ required: true, message: 'Please input your count price!' }]}
-        >
-            <InputComponent value={stateProduct.price} onChange={handleOnchange} name="price" />
-        </Form.Item>
-        <Form.Item
-            label="Description"
-            name="description"
-            rules={[{ required: true, message: 'Please input your count description!' }]}
-        >
-            <InputComponent value={stateProduct.description} onChange={handleOnchange} name="description" />
-        </Form.Item>
-        <Form.Item
-            label="Rating"
-            name="rating"
-            rules={[{ required: true, message: 'Please input your count rating!' }]}
-        >
-            <InputComponent value={stateProduct.rating} onChange={handleOnchange} name="rating" />
-        </Form.Item>
-        <Form.Item
-            label="Discount"
-            name="discount"
-            rules={[{ required: true, message: 'Please input your discount of product!' }]}
-        >
-            <InputComponent value={stateProduct.discount} onChange={handleOnchange} name="discount" />
-        </Form.Item>
-        <Form.Item
-            label="Image"
-            name="image"
-            rules={[{ required: true, message: 'Please input your count image!' }]}
-        >
-            <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
-            <Button >Select File</Button>
-            {stateProduct?.image && (
-                <img src={stateProduct?.image} style={{
-                height: '60px',
-                width: '60px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                marginLeft: '10px'
-                }} alt="avatar" />
+
+            <Form.Item
+              label="Type"
+              name="type"
+              rules={[{ required: true, message: 'Please input your type!' }]}
+            >
+              <Select
+                name="type"
+                // defaultValue="lucy"
+                // style={{ width: 120 }}
+                value={stateProduct.type}
+                onChange={handleChangeSelect}
+                options={renderOptions(typeProduct?.data?.data)}
+                />
+            </Form.Item>
+            {stateProduct.type === 'add_type' && (
+              <Form.Item
+                label='New type'
+                name="newType"
+                rules={[{ required: true, message: 'Please input your type!' }]}
+              >
+                <InputComponent value={stateProduct.newType} onChange={handleOnchange} name="newType" />
+              </Form.Item>
             )}
-            </WrapperUploadFile>
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-            Submit
-            </Button>
-        </Form.Item>
-        </Form>
+            <Form.Item
+              label="Count inStock"
+              name="countInStock"
+              rules={[{ required: true, message: 'Please input your count inStock!' }]}
+            >
+              <InputComponent value={stateProduct.countInStock} onChange={handleOnchange} name="countInStock" />
+            </Form.Item>
+            <Form.Item
+              label="Price"
+              name="price"
+              rules={[{ required: true, message: 'Please input your count price!' }]}
+            >
+              <InputComponent value={stateProduct.price} onChange={handleOnchange} name="price" />
+            </Form.Item>
+            <Form.Item
+              label="Description"
+              name="description"
+              rules={[{ required: true, message: 'Please input your count description!' }]}
+            >
+              <InputComponent value={stateProduct.description} onChange={handleOnchange} name="description" />
+            </Form.Item>
+            <Form.Item
+              label="Rating"
+              name="rating"
+              rules={[{ required: true, message: 'Please input your count rating!' }]}
+            >
+              <InputComponent value={stateProduct.rating} onChange={handleOnchange} name="rating" />
+            </Form.Item>
+            <Form.Item
+              label="Discount"
+              name="discount"
+              rules={[{ required: true, message: 'Please input your discount of product!' }]}
+            >
+              <InputComponent value={stateProduct.discount} onChange={handleOnchange} name="discount" />
+              
+            </Form.Item>
+            <Form.Item
+              label="Gift"
+              name="gift"
+            >
+              <InputComponent value={stateProduct.gift} onChange={handleOnchange} name="gift" />
+              
+            </Form.Item>
+            <Form.Item
+              label="Image"
+              name="image"
+              rules={[{ required: true, message: 'Please input your count image!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProduct?.image && (
+                  <img src={stateProduct?.image} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
       </ModalComponent>
       <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
           <Form
@@ -633,6 +632,13 @@ const AdminProduct = () => {
               rules={[{ required: true, message: 'Please input your discount of product!' }]}
             >
               <InputComponent value={stateProductDetails.discount} onChange={handleOnchangeDetails} name="discount" />
+            </Form.Item>
+            <Form.Item
+              label="Gift"
+              name="gift"
+              rules={[{ required: true, message: 'Please input your gift of product!' }]}
+            >
+              <InputComponent value={stateProductDetails.gift} onChange={handleOnchangeDetails} name="gift" />
             </Form.Item>
             <Form.Item
               label="Image"

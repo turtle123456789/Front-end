@@ -126,6 +126,7 @@ export const BestSeller = styled.div`
     margin: 20px 30px;
     position: relative;
     display: flex;
+    gap: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
     max-width: 100%;

@@ -19,6 +19,7 @@ import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
 const AdminUser = () => {
   const [rowSelected, setRowSelected] = useState('')
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false)
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
   const user = useSelector((state) => state?.user)
   const searchInput = useRef(null);
@@ -89,6 +90,7 @@ const AdminUser = () => {
         avatar: res.data?.avatar
       })
     }
+    setIsLoadingUpdate(false)
   }
 
   useEffect(() => {
@@ -97,6 +99,7 @@ const AdminUser = () => {
 
   useEffect(() => {
     if (rowSelected && isOpenDrawer) {
+      setIsLoadingUpdate(true)
       fetchGetDetailsUser(rowSelected)
     }
   }, [rowSelected, isOpenDrawer])
@@ -105,9 +108,9 @@ const AdminUser = () => {
     setIsOpenDrawer(true)
   }
 
-  const { data: dataUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
-  const { data: dataDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
-  const { data: dataDeletedMany, isSuccess: isSuccessDelectedMany, isError: isErrorDeletedMany } = mutationDeletedMany
+  const { data: dataUpdated, isLoading: isLoadingUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
+  const { data: dataDeleted, isLoading: isLoadingDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
+  const { data: dataDeletedMany, isLoading: isLoadingDeletedMany, isSuccess: isSuccessDelectedMany, isError: isErrorDeletedMany } = mutationDeletedMany
 
   const queryClient = useQueryClient()
   const users = queryClient.getQueryData(['users'])
@@ -229,19 +232,21 @@ const AdminUser = () => {
       filters: [
         {
           text: 'True',
-          value: true,
+          value: true
         },
         {
           text: 'False',
-          value: false,
+          value: false
         }
       ],
+      onFilter: (value, record) => record.isAdmin === value 
     },
     {
       title: 'Phone',
       dataIndex: 'phone',
       sorter: (a, b) => a.phone - b.phone,
       ...getColumnSearchProps('phone')
+      
     },
     {
       title: 'Action',
@@ -331,7 +336,7 @@ const AdminUser = () => {
     <div>
       <WrapperHeader>Quản lý người dùng</WrapperHeader>
       <div style={{ marginTop: '20px' }}>
-        <TableComponent handleDelteMany={handleDelteManyUsers} columns={columns} isLoading={isFetchingUser} data={dataTable} onRow={(record, rowIndex) => {
+        <TableComponent handleDelteMany={handleDelteManyUsers} columns={columns}  data={dataTable} onRow={(record, rowIndex) => {
           return {
             onClick: event => {
               setRowSelected(record._id)
@@ -340,72 +345,72 @@ const AdminUser = () => {
         }} />
       </div>
       <DrawerComponent title='Chi tiết người dùng' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
-        <Form
-        name="basic"
-        labelCol={{ span: 2 }}
-        wrapperCol={{ span: 22 }}
-        onFinish={onUpdateUser}
-        autoComplete="on"
-        form={form}
-        >
-        <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: 'Please input your name!' }]}
-        >
-            <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
-        </Form.Item>
+          <Form
+            name="basic"
+            labelCol={{ span: 2 }}
+            wrapperCol={{ span: 22 }}
+            onFinish={onUpdateUser}
+            autoComplete="on"
+            form={form}
+          >
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: 'Please input your name!' }]}
+            >
+              <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
+            </Form.Item>
 
-        <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
-        >
-            <InputComponent value={stateUserDetails['email']} onChange={handleOnchangeDetails} name="email" />
-        </Form.Item>
-        <Form.Item
-            label="Phone"
-            name="phone"
-            rules={[{ required: true, message: 'Please input your  phone!' }]}
-        >
-            <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
-        </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: 'Please input your email!' }]}
+            >
+              <InputComponent value={stateUserDetails['email']} onChange={handleOnchangeDetails} name="email" />
+            </Form.Item>
+            <Form.Item
+              label="Phone"
+              name="phone"
+              rules={[{ required: true, message: 'Please input your  phone!' }]}
+            >
+              <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
+            </Form.Item>
 
-        <Form.Item
-            label="Adress"
-            name="address"
-            rules={[{ required: true, message: 'Please input your  address!' }]}
-        >
-            <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
-        </Form.Item>
+            <Form.Item
+              label="Adress"
+              name="address"
+              rules={[{ required: true, message: 'Please input your  address!' }]}
+            >
+              <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
+            </Form.Item>
 
-        <Form.Item
-            label="Avatar"
-            name="avatar"
-            rules={[{ required: true, message: 'Please input your image!' }]}
-        >
-            <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-            <Button >Select File</Button>
-            {stateUserDetails?.avatar && (
-                <img src={stateUserDetails?.avatar} style={{
-                height: '60px',
-                width: '60px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                marginLeft: '10px'
-                }} alt="avatar" />
-            )}
-            </WrapperUploadFile>
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-            Apply
-            </Button>
-        </Form.Item>
-        </Form>
+            <Form.Item
+              label="Avatar"
+              name="avatar"
+              rules={[{ required: true, message: 'Please input your image!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                <Button >Select File</Button>
+                {stateUserDetails?.avatar && (
+                  <img src={stateUserDetails?.avatar} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Apply
+              </Button>
+            </Form.Item>
+          </Form>
       </DrawerComponent>
       <ModalComponent title="Xóa người dùng" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteUser}>
-        <div>Bạn có chắc xóa tài khoản này không?</div>
+          <div>Bạn có chắc xóa tài khoản này không?</div>
       </ModalComponent>
     </div>
   )

@@ -5,13 +5,15 @@ import iconWhiteHeart from '../../assets/images/heart 8.svg'
 import { Link } from 'react-router-dom'
 import { Rate } from 'antd'
 const CardProductComponent = (props) => {
-  const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
-  const percentage = Math.floor(((price -discount) / price) * 100);
+  
+  const { countInStock, description, image, name, price, rating, type, discount, selled, id, percentage,gift} = props
+  const percentages = Math.round(percentage)
+
   const formatNumber = (number) => {
     return new Intl.NumberFormat('vi-VN').format(number); // Chọn ngôn ngữ và quốc gia theo ý muốn
 };
   return (
-    <div style={{maxWidth: '269px', backgroundColor: '#fafafa'}}>
+    <div style={{maxWidth: '269px',minWidth: '269px', backgroundColor: '#fafafa'}}>
       <ProductImg >
         <img src={image} alt={name} />
       </ProductImg>
@@ -30,10 +32,10 @@ const CardProductComponent = (props) => {
         </ProductContent>
         <ProductPrice>
           <div>
-            <span className="originalPrice">{formatNumber(price)} đ</span>
-            <span className="discountedPrice">{formatNumber(discount)} đ</span>
+            <span className="originalPrice">{formatNumber(discount)} đ</span>
+            <span className="discountedPrice">{formatNumber(price)} đ</span>
           </div>
-          <span className='discountPercentage'>{percentage}%</span>
+          <span className='discountPercentage'>{percentages}%</span>
         </ProductPrice>
         <LevelOfLiking>
           <div className="review">
@@ -49,7 +51,7 @@ const CardProductComponent = (props) => {
         </LevelOfLiking>
         {selled && (
         <GiftSale>
-          <span className="crop-text1">{percentage}</span>
+          <span className="crop-text1" >{gift}</span>
         </GiftSale>
       )}
       </div>

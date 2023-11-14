@@ -14,6 +14,7 @@ import { useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import OrderAdmin from '../../components/OrderAmin/OrderAmin';
+import { Container } from '../../components/ContainerComponent/ContainerComponent';
 
 const AdminPage = () => {
   const user = useSelector((state) => state?.user)
@@ -91,10 +92,10 @@ const AdminPage = () => {
   const handleOnCLick = ({ key }) => {
     setKeySelected(key)
   }
-  console.log('memoCount', memoCount)
   return (
     <>
-      <HeaderComponent isHiddenSearch isHiddenCart />
+    <Container>
+      <HeaderComponent />
       <div style={{ display: 'flex',overflowX: 'hidden' }}>
         <Menu
           mode="inline"
@@ -113,6 +114,7 @@ const AdminPage = () => {
           {renderPage(keySelected)}
         </div>
       </div>
+    </Container>
     </>
   )
 }

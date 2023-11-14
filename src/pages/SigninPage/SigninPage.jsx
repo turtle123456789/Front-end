@@ -80,8 +80,8 @@ const SigninPage = () => {
                       remember: true,
                     }}
                     onFinish={onFinish}
+                    autoComplete="on"
                     // onFinishFailed={onFinishFailed}
-                    autoComplete="off"
                   >
                     <Form.Item
                       label="Email"

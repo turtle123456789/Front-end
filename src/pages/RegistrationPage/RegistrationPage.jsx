@@ -37,7 +37,6 @@ const RegistrationPage = () => {
     const name = values.username
     const phone = values.phoneNumber
     const confirmPassword = values.password2
-    console.log('sign-up:', email,password,name,phone,confirmPassword);
     mutation.mutate({
       email,
       password,
@@ -70,11 +69,10 @@ const RegistrationPage = () => {
             }}
             form={form}
             
-            autoComplete="off"
             layout="vertical"
             onFinish={onFinish}
             // onFinishFailed={onFinishFailed}
-            
+            autoComplete="on"
           >
             <Form.Item
               label="Tên"

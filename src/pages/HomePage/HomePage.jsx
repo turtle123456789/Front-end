@@ -25,22 +25,25 @@ import posterSupport from '../../assets/images/poster1.webp'
 import HeaderSaleComponent from '../../components/HeaderSaleComponent/HeaderSaleComponent'
 import SlideProductComponent from '../../components/SlideProductComponent/SlideProductComponent'
 import { typeProductData } from '../../Data/TypeProductData'
-import { productSellerData, productsData } from '../../Data/ProductData'
 import SlideBrandComponent from '../../components/SlideBrandComponent/SlideBrandComponent'
-import { brandsData } from '../../Data/BrandData'
+import { brandsData } from '../../components/BrandData'
 import { TopHeader } from '../../components/HeaderComponent/style'
-import LayoutProductComponent from '../../components/LayoutProductComponent/LayoutProductComponent'
 import LayoutTypeProductComponent from '../../components/LayoutTypeProductComponent/LayoutTypeProductComponent'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import "./style.css";
+import CardProductComponent from '../../components/CardProductComponent/CardProductComponent'
 const HomePage = () => {
-  const fetchProductAll = async () =>{
-    const res = await ProductService.getAllProduct()
+  const [limit, setLimit] = useState(10)
+  const fetchProductAll = async (context) => {
+    const limit = context?.queryKey && context?.queryKey[1]
+    const search = context?.queryKey && context?.queryKey[2]
+    const res = await ProductService.getAllProduct(search, limit)
+
     return res
+
   }
-  const {data: products}= useQuery(['products'], fetchProductAll,{retry: 3,retryDelay: 1000})
-  console.log('data', products)
+  const {data: products}= useQuery(['products', limit], fetchProductAll,{retry: 3,retryDelay: 1000})
 
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuTimeout, setMenuTimeout] = useState(null); 
@@ -63,7 +66,6 @@ const HomePage = () => {
     };
   }, [menuTimeout]);
   const [width, setWidth] = useState(1476);
-  const maxProductsToShow = 10;
   return (
     <div>
       <Container>
@@ -341,7 +343,8 @@ const HomePage = () => {
         <br /><br />
         <HeaderSaleComponent/>
         <br /><br />
-        <SlideProductComponent products={productsData} isSellerProduct={true} />
+       <SlideProductComponent products={products} />
+       
         <br /><br />
         <div style={{margin: '20px 30px'}}>
           <h2>DANH MỤC SẢN PHẨM</h2>
@@ -392,9 +395,9 @@ const HomePage = () => {
         </div>
 
         <BestSeller>
-          {products?.data?.map((product) => {
+          {products?.data?.map((product,limit) => {
               return (
-                <LayoutProductComponent 
+                <CardProductComponent
                   key={product._id}
                   countInStock={product.countInStock}
                   description={product.description}
@@ -406,6 +409,8 @@ const HomePage = () => {
                   selled={product.selled}
                   discount={product.discount}
                   id={product._id}
+                  percentage={product.percentage}
+                  gift = {product.gift}
                 />
               )
             })}

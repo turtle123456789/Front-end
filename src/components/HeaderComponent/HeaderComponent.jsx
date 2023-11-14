@@ -18,11 +18,13 @@ import { useSelector } from 'react-redux'
 import {useDispatch} from 'react-redux'
 import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/userSlide'
+import { searchProduct } from '../../redux/slides/productSlide'
 const HeaderComponent = () => {
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
+  const [search,setSearch] = useState('')
   const handleLogout = async() =>{
     await UserService.logOutUser
     dispatch(resetUser())
@@ -40,6 +42,14 @@ const HeaderComponent = () => {
         )}
     </div>
   );
+  const onSearch = (e) => {
+    setSearch(e.target.value)
+
+  }
+  const handleSearchButtonClick = (e)=>{
+
+    dispatch(searchProduct(search))
+  }
   return (
     <div>
         <Container>
@@ -50,8 +60,8 @@ const HeaderComponent = () => {
             <a href={"/"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>
             <SearchProduct>
               <FormSearch >
-                <Input placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>
-                <Button type='primary' style={{height: '43px', width: '64px', background:'var(--pink)', borderRadius: '0 10px 10px 0'}}><SearchOutlined /></Button>
+                <Input  onChange={onSearch}  autoComplete="on" placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>
+                <Button onClick={handleSearchButtonClick} type='primary' style={{height: '43px', width: '64px', background:'var(--pink)', borderRadius: '0 10px 10px 0'}}><SearchOutlined /></Button>
               </FormSearch>
               <ChooseUse>
                 <Link to="/ProductsPage/chamsoc da">Chăm sóc da</Link>
