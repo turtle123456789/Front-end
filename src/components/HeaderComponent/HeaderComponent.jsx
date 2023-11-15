@@ -38,7 +38,7 @@ const HeaderComponent = () => {
   }, [user?.name, user?.avatar])
   const content = (
     <div>
-        <Logout onClick={handleLogout}>Đăng xuất</Logout>
+        <Logout onClick={() => handleClickNavigate()}>Đăng xuất</Logout>
         <Logout onClick={() => handleClickNavigate('profile')}>Thông tin người dùng</Logout>
         {user?.isAdmin && (
           <Logout onClick={() => handleClickNavigate('admin')}>Quản lý hệ thống</Logout>
@@ -59,6 +59,7 @@ const HeaderComponent = () => {
       })
     }else {
       handleLogout()
+      navigate('/')
     }
     setIsOpenPopup(false)
   }

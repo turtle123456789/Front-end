@@ -11,11 +11,11 @@ import InputComponent from '../../components/InputComponent/InputComponent';
 import { useMutationHooks } from '../../hooks/useMutationHook';
 import * as  UserService from '../../services/UserService'
 import * as OrderService from '../../services/OrderService'
+
 import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/userSlide';
 import { useNavigate } from 'react-router-dom';
 import { removeAllOrderProduct } from '../../redux/slides/orderSlide';
-// import { PayPalButton } from "react-paypal-button-v2";
 import * as PaymentService from '../../services/PaymentService'
 
 const PaymentPage = () => {
@@ -32,7 +32,7 @@ const PaymentPage = () => {
     name: '',
     phone: '',
     address: '',
-    city: ''
+
   })
   const [form] = Form.useForm();
 
@@ -46,7 +46,6 @@ const PaymentPage = () => {
   useEffect(() => {
     if(isOpenModalUpdateInfo) {
       setStateUserDetails({
-        city: user?.city,
         name: user?.name,
         address: user?.address,
         phone: user?.phone
@@ -65,16 +64,6 @@ const PaymentPage = () => {
     return result
   },[order])
 
-  const priceDiscountMemo = useMemo(() => {
-    const result = order?.orderItemsSlected?.reduce((total, cur) => {
-      const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount  * cur.amount) / 100)
-    },0)
-    if(Number(result)){
-      return result
-    }
-    return 0
-  },[order])
 
   const diliveryPriceMemo = useMemo(() => {
     if(priceMemo > 200000){
@@ -87,12 +76,12 @@ const PaymentPage = () => {
   },[priceMemo])
 
   const totalPriceMemo = useMemo(() => {
-    return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
-  },[priceMemo,priceDiscountMemo, diliveryPriceMemo])
+    return Number(priceMemo)  + Number(diliveryPriceMemo)
+  },[priceMemo, diliveryPriceMemo])
 
   const handleAddOrder = () => {
     if(user?.access_token && order?.orderItemsSlected && user?.name
-      && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
+      && user?.address && user?.phone && priceMemo && user?.id) {
         // eslint-disable-next-line no-unused-expressions
         mutationAddOrder.mutate(
           { 
@@ -101,7 +90,6 @@ const PaymentPage = () => {
             fullName: user?.name,
             address:user?.address, 
             phone:user?.phone,
-            city: user?.city,
             paymentMethod: payment,
             itemsPrice: priceMemo,
             shippingPrice: diliveryPriceMemo,
@@ -138,7 +126,7 @@ const PaymentPage = () => {
 
   const {data} = mutationUpdate
   const {data: dataAdd, isSuccess, isError} = mutationAddOrder
-
+      console.log('dataAdd, isSuccess, isError', dataAdd, isSuccess, isError)
   useEffect(() => {
     if (isSuccess && dataAdd?.status === 'OK') {
       const arrayOrdered = []
@@ -179,7 +167,6 @@ const PaymentPage = () => {
         fullName: user?.name,
         address:user?.address, 
         phone:user?.phone,
-        city: user?.city,
         paymentMethod: payment,
         itemsPrice: priceMemo,
         shippingPrice: diliveryPriceMemo,
@@ -194,11 +181,11 @@ const PaymentPage = () => {
 
 
   const handleUpdateInforUser = () => {
-    const {name, address,city, phone} = stateUserDetails
-    if(name && address && city && phone){
+    const {name, address, phone} = stateUserDetails
+    if(name && address  && phone){
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({name, address,city, phone}))
+          dispatch(updateUser({name, address, phone}))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -241,7 +228,7 @@ const PaymentPage = () => {
 
   return (
     <div style={{background: '#f5f5fa', with: '100%', height: '100vh'}}>
-
+   
         <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
           <h3>Thanh toán</h3>
           <div style={{ display: 'flex', justifyContent: 'center'}}>
@@ -270,7 +257,7 @@ const PaymentPage = () => {
                 <WrapperInfo>
                   <div>
                     <span>Địa chỉ: </span>
-                    <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
+                    <span style={{fontWeight: 'bold'}}>{ `${user?.address}`} </span>
                     <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
                   </div>
                 </WrapperInfo>
@@ -279,10 +266,7 @@ const PaymentPage = () => {
                     <span>Tạm tính</span>
                     <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceMemo)}</span>
                   </div>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Giảm giá</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceDiscountMemo)}</span>
-                  </div>
+
                   <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                     <span>Phí giao hàng</span>
                     <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(diliveryPriceMemo)}</span>
@@ -296,18 +280,6 @@ const PaymentPage = () => {
                   </span>
                 </WrapperTotal>
               </div>
-              {/* {payment === 'paypal' && sdkReady ? (
-                <div style={{width: '320px'}}>
-                  <PayPalButton
-                    amount={Math.round(totalPriceMemo / 30000)}
-                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                    onSuccess={onSuccessPaypal}
-                    onError={() => {
-                      alert('Erroe')
-                    }}
-                  />
-                </div>
-              ) : (
                 <ButtonComponent
                   onClick={() => handleAddOrder()}
                   size={40}
@@ -321,12 +293,11 @@ const PaymentPage = () => {
                   textbutton={'Đặt hàng'}
                   styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
               ></ButtonComponent>
-              )} */}
             </WrapperRight>
           </div>
         </div>
         <ModalComponent title="Cập nhật thông tin giao hàng" open={isOpenModalUpdateInfo} onCancel={handleCancleUpdate} onOk={handleUpdateInforUser}>
-
+          
           <Form
               name="basic"
               labelCol={{ span: 4 }}
@@ -341,13 +312,6 @@ const PaymentPage = () => {
                 rules={[{ required: true, message: 'Please input your name!' }]}
               >
                 <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
-              </Form.Item>
-              <Form.Item
-                label="City"
-                name="city"
-                rules={[{ required: true, message: 'Please input your city!' }]}
-              >
-                <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
               </Form.Item>
               <Form.Item
                 label="Phone"
@@ -365,9 +329,9 @@ const PaymentPage = () => {
                 <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
               </Form.Item>
             </Form>
-
+          
         </ModalComponent>
-
+ 
     </div>
   )
 }

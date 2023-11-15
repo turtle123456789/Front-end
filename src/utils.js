@@ -29,7 +29,6 @@ export function getItem(label, key, icon, children, type) {
 
 export const renderOptions = (arr,number) => {
     let results = []
-    console.log('arr', arr)
     if(arr) {
         results = arr?.map((opt) => {
             return {
@@ -100,7 +99,6 @@ export const initFacebookSDK = () => {
                 object[opt[type]] = 1
             } else {
                 object[opt[type]]+=1
-                console.log('c;getBase64', object[opt[type]], typeof(object[opt[type]]))
             }
         })
         const results = Array.isArray(Object.keys(object)) && Object.keys(object).map((item) => {

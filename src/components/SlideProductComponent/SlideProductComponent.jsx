@@ -19,7 +19,7 @@ const SlideProductComponent = ({ products }) => {
         .filter(product => product?.gift?.length > 0)
         .map(product => {
           const modifiedProduct = { ...product };
-          modifiedProduct.selled = true;
+          modifiedProduct.sale = true;
           return modifiedProduct;
         })
     : [];
@@ -27,8 +27,8 @@ const SlideProductComponent = ({ products }) => {
   return (
     <div>
       <Slider {...settings}>
-        {products?.length > 0
-          ? products?.map((product) => (
+        {productsWithSelled?.length > 0
+          ? productsWithSelled?.map((product) => (
               <CardProductComponent
                 key={product._id}
                 countInStock={product.countInStock}
@@ -43,6 +43,7 @@ const SlideProductComponent = ({ products }) => {
                 id={product._id}
                 percentage={product.percentage}
                 gift={product.gift}
+                sale={product.sale}
               />
             ))
           : productsWithSelled?.map((product) => (

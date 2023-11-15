@@ -31,7 +31,6 @@ const OrderPage = () => {
     phone: '',
     address: '',
   })
-  console.log('isOpenModalUpdateInfo', isOpenModalUpdateInfo)
   const navigate = useNavigate()
   const [form] = Form.useForm();
 
@@ -101,7 +100,6 @@ const OrderPage = () => {
     },0)
     return result
   },[order])
-  console.log('priceMemo', priceMemo)
   const diliveryPriceMemo = useMemo(() => {
     if(priceMemo >= 20000 && priceMemo < 500000){
       return 10000

@@ -92,19 +92,9 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
 
     const handleAddOrderProduct = () => {
       if(!user?.id) {
-          navigate('/sign-in', {state: location?.pathname})
+            message.error('Vui lòng đăng nhập')
+          navigate('/Signin', {state: location?.pathname})
       }else {
-          // {
-          //     name: { type: String, required: true },
-          //     amount: { type: Number, required: true },
-          //     image: { type: String, required: true },
-          //     price: { type: Number, required: true },
-          //     product: {
-          //         type: mongoose.Schema.Types.ObjectId,
-          //         ref: 'Product',
-          //         required: true,
-          //     },
-          // },
           const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
           if((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
               dispatch(addOrderProduct({
@@ -123,6 +113,7 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
           }
       }
   }
+  const numberBuy = productDetails?.countInStock - numProduct;
       const settings = {  
           infinite: true, // Vòng lặp vô tận
           speed: 1000, // Tốc độ trượt
@@ -228,7 +219,7 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
                                   <Rate allowHalf defaultValue={2.5} />
                                   <div className="quantity">
                                   <img src={iconShopingCar} alt=""/>
-                                  <span className="quantityProduct">{productDetails?.countInStock}</span>
+                                  <span className="quantityProduct">{numberBuy}</span>
                                   </div>
                               </div>
                           </LevelOfLiking>

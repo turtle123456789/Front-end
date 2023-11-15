@@ -1,17 +1,15 @@
-import { Button, Form, Space } from 'antd'
+import { Button, Space } from 'antd'
 import React from 'react'
 import { WrapperHeader, WrapperUploadFile } from './style'
 import TableComponent from '../TableComponent/TableComponent'
 import InputComponent from '../InputComponent/InputComponent'
-import DrawerComponent from '../DrawerComponent/DrawerComponent'
-import ModalComponent from '../ModalComponent/ModalComponent'
+
 import { convertPrice, getBase64 } from '../../utils'
-import { useEffect } from 'react'
-import * as message from '../Message/Message'
+
 
 import * as OrderService from '../../services/OrderService'
 import { useQuery } from '@tanstack/react-query'
-import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { orderContant } from '../../contant'
 import PieChartComponent from './PieChart'
@@ -25,9 +23,9 @@ const OrderAdmin = () => {
     return res
   }
 
-
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
   const {data: orders } = queryOrder
+
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -79,6 +77,7 @@ const OrderAdmin = () => {
         }}
       />
     ),
+   
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
@@ -101,7 +100,6 @@ const OrderAdmin = () => {
     //     text
     //   ),
   });
-
   const columns = [
     {
       title: 'User name',
@@ -122,16 +120,22 @@ const OrderAdmin = () => {
       ...getColumnSearchProps('address')
     },
     {
+      title: 'Name Product',
+      dataIndex: 'name',
+      sorter: (a, b) => a.name.length - b.name.length,
+      ...getColumnSearchProps('name')
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'amount',
+      sorter: (a, b) => a.amount.length - b.amount.length,
+      ...getColumnSearchProps('amount')
+    },
+    {
       title: 'Paided',
       dataIndex: 'isPaid',
       sorter: (a, b) => a.isPaid.length - b.isPaid.length,
       ...getColumnSearchProps('isPaid')
-    },
-    {
-      title: 'Shipped',
-      dataIndex: 'isDelivered',
-      sorter: (a, b) => a.isDelivered.length - b.isDelivered.length,
-      ...getColumnSearchProps('isDelivered')
     },
     {
       title: 'Payment method',
@@ -148,8 +152,13 @@ const OrderAdmin = () => {
   ];
 
   const dataTable = orders?.data?.length && orders?.data?.map((order) => {
-    console.log('usewr', order)
-    return { ...order, key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
+    
+    const orderItemsNames = order?.orderItems?.map((orderItem) => ({
+      name: orderItem?.name,
+      amount: orderItem?.amount
+    }));
+    console.log('orderItemsNames', orderItemsNames?.[0].name)
+    return { ...order,name:  orderItemsNames?.[0].name,amount:  orderItemsNames?.[0].amount,key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
   })
 
   return (
@@ -159,7 +168,8 @@ const OrderAdmin = () => {
         <PieChartComponent data={orders?.data} />
       </div>
       <div style={{ marginTop: '20px' }}>
-        <TableComponent  columns={columns}data={dataTable} />
+        <TableComponent  columns={columns}data={
+          dataTable} />
       </div>
     </div>
   )

@@ -11,26 +11,14 @@ import iconPerfumeBottle from '../../assets/images/perfume-bottle .svg'
 import iconFunctionalFoods from '../../assets/images/functional-foods.svg'
 import iconArrow from '../../assets/images/Arrow 4.svg'
 import iconVector from '../../assets/images/Vector 2.svg'
-import image1 from '../../assets/images/image(1).webp'
-import image2 from '../../assets/images/image(2).webp'
-import image3 from '../../assets/images/image(3).webp'
-import image4 from '../../assets/images/image(4).webp'
-import image5 from '../../assets/images/image(5).webp'
-import image6 from '../../assets/images/image(6).webp'
-import image7 from '../../assets/images/image(7).webp'
-import image8 from '../../assets/images/image(8).webp'
-import image9 from '../../assets/images/image(9).webp'
-import image10 from '../../assets/images/image(10).webp'
 import posterSupport from '../../assets/images/poster1.webp'
 import HeaderSaleComponent from '../../components/HeaderSaleComponent/HeaderSaleComponent'
 import SlideProductComponent from '../../components/SlideProductComponent/SlideProductComponent'
-import SlideBrandComponent from '../../components/SlideBrandComponent/SlideBrandComponent'
 import { TopHeader } from '../../components/HeaderComponent/style'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import "./style.css";
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent'
-import CardTypeProductComponent from '../../components/CardTypeProductComponent/CardTypeProductComponent'
 const HomePage = () => {
   const [limit, setLimit] = useState(10)
   const fetchProductAll = async (context) => {
@@ -47,7 +35,7 @@ const HomePage = () => {
   }
   const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
   const {data: products}= useQuery(['products', limit], fetchProductAll,{retry: 3,retryDelay: 1000})
-console.log('typeProduct', typeProduct?.data?.data)
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuTimeout, setMenuTimeout] = useState(null); 
   const handleMouseEnter = (index) => {
@@ -83,8 +71,9 @@ console.log('typeProduct', typeProduct?.data?.data)
               </a>
               {activeIndex === 0 && (
               <CategoryMenuBenefits show={activeIndex === 0}>
+
                 <ul>
-                  <br />
+                  <br />  
                   <span>Dầu gội- Dầu xả</span>
                   <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gàu</a></li>
                   <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gãy rụng</a></li>
@@ -301,48 +290,6 @@ console.log('typeProduct', typeProduct?.data?.data)
           </BannerRight>
         </HomeAd>
         <br /><br />
-        <MenuEven>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image1} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image2} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image3} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image4} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image5} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image6} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image7} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image8} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image9} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-          <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
-            <img src={image10} alt="" />
-            <span>Bán Chạy</span>
-          </a>
-        </MenuEven>
         <br /><br />
         <HeaderSaleComponent/>
         <br /><br />

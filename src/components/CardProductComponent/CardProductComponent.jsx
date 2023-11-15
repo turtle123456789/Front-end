@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { Rate } from 'antd'
 const CardProductComponent = (props) => {
   
-  const { countInStock, description, image, name, price, rating, type, discount, selled, id, percentage,gift} = props
+  const { countInStock, description, image, name, price, rating, type,sale, discount, selled, id, percentage,gift} = props
   const percentages = Math.round(percentage)
 
   const formatNumber = (number) => {
@@ -49,7 +49,7 @@ const CardProductComponent = (props) => {
             <img src={iconWhiteHeart} alt=""/>
           </div>
         </LevelOfLiking>
-        {selled && (
+        {sale && (
         <GiftSale>
           <span className="crop-text1" >{gift}</span>
         </GiftSale>
