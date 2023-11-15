@@ -27,8 +27,9 @@ export function getItem(label, key, icon, children, type) {
     };
 }
 
-export const renderOptions = (arr) => {
+export const renderOptions = (arr,number) => {
     let results = []
+    console.log('arr', arr)
     if(arr) {
         results = arr?.map((opt) => {
             return {
@@ -37,10 +38,22 @@ export const renderOptions = (arr) => {
             }
         })
     }
-    results.push({
-        label: 'Thêm type',
-        value: 'add_type'
-    })
+    if(number === 1 ){
+        results.push({
+            label: 'Thêm type',
+            value: 'add_type'
+        })
+    }else if(number === 2){
+        results.push({
+            label: 'Thêm brand',
+            value: 'add_brand'
+        })
+    }else if( number === 3){
+        results.push({
+            label: 'Thêm partBody',
+            value: 'add_partBody'
+        })
+    }
     return results
 }
 

@@ -32,9 +32,18 @@ const AdminProduct = () => {
     countInStock: '',
     newType: '',
     discount: '',
-    gift: ''
+    gift: '',
+    brand: '',
+    newBrand: '',
+    partBody: '',
+    NewPartBody: '',
+    image1: '',
+    image2: '',
+    image3: '',
+    image4: '',
   })
   const [stateProduct, setStateProduct] = useState(inittial())
+  console.log('stateProduct', stateProduct)
   const [stateProductDetails, setStateProductDetails] = useState(inittial())
 
   const [form] = Form.useForm();
@@ -47,7 +56,15 @@ const AdminProduct = () => {
         rating,
         image,
         type,
-        countInStock,discount,gift } = data
+        countInStock,
+        discount,
+        gift,
+        brand,
+        partBody,
+        image1,
+        image2,
+        image3,
+        image4, } = data
       const res = ProductService.createProduct({
         name,
         price,
@@ -57,7 +74,13 @@ const AdminProduct = () => {
         type,
         countInStock,
         discount,
-        gift
+        gift,
+        brand,
+        partBody,
+        image1,
+        image2,
+        image3,
+        image4,
       })
       return res
     }
@@ -115,7 +138,13 @@ const AdminProduct = () => {
         type: res?.data?.type,
         countInStock: res?.data?.countInStock,
         discount: res?.data?.discount,
-        gift: res?.data?.gift
+        gift: res?.data?.gift,
+        brand: res?.data?.brand,
+        partBody: res?.data?.partBody,
+        image1: res?.data?.image1,
+        image2: res?.data?.image2,
+        image3: res?.data?.image3,
+        image4: res?.data?.image4,
       })
     }
   }
@@ -150,7 +179,15 @@ const AdminProduct = () => {
     const res = await ProductService.getAllTypeProduct()
     return res
   }
-
+  const fetchAllBrandProduct = async () => {
+    const res = await ProductService.getAllBrandProduct()
+    console.log('res', res)
+    return res
+  }
+  const fetchAllPartBodyProduct = async () => {
+    const res = await ProductService.getAllPartBodyProduct()
+    return res
+  }
   const { data,isSuccess, isError } = mutation
   const { data: dataUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
   const { data: dataDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
@@ -159,6 +196,8 @@ const AdminProduct = () => {
 
   const queryProduct = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
   const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
+  const brandProduct = useQuery({ queryKey: ['brand-product'], queryFn: fetchAllBrandProduct })
+  const partBodyProduct = useQuery({ queryKey: ['partBody-product'], queryFn: fetchAllPartBodyProduct })
   const { isLoading: isLoadingProducts, data: products } = queryProduct
   const renderAction = () => {
     return (
@@ -270,29 +309,16 @@ const AdminProduct = () => {
       },
     },
     {
-      title: 'Rating',
-      dataIndex: 'rating',
-      sorter: (a, b) => a.rating - b.rating,
-      filters: [
-        {
-          text: '>= 5',
-          value: '>=',
-        },
-        {
-          text: '<= 5',
-          value: '<=',
-        }
-      ],
-      onFilter: (value, record) => {
-        if (value === '>=') {
-          return Number(record.rating) >= 5
-        }
-        return Number(record.rating) <= 5
-      },
+      title: 'Brand',
+      dataIndex: 'brand',
+      sorter: (a, b) => a.brand.length - b.brand.length,
+      ...getColumnSearchProps('brand')
     },
     {
       title: 'Type',
       dataIndex: 'type',
+      orter: (a, b) => a.type.length - b.type.length,
+      ...getColumnSearchProps('type')
     },
     {
       title: 'Action',
@@ -339,7 +365,18 @@ const AdminProduct = () => {
       rating: '',
       image: '',
       type: '',
-      countInStock: ''
+      countInStock: '',
+      newType: '',
+      discount: '',
+      gift: '',
+      brand: '',
+      newBrand: '',
+      partBody: '',
+      NewPartBody: '',
+      image1: '',
+      image2: '',
+      image3: '',
+      image4: '',
     })
     form.resetFields()
   };
@@ -377,7 +414,13 @@ const AdminProduct = () => {
       type: '',
       countInStock: '',
       discount: '',
-      gift: ''
+      gift: '',
+      brand: '',
+      partBody: '',
+      image1: '',
+      image2: '',
+      image3: '',
+      image4: '',
     })
     form.resetFields()
   };
@@ -392,7 +435,13 @@ const AdminProduct = () => {
       type: stateProduct.type === 'add_type' ? stateProduct.newType : stateProduct.type,
       countInStock: stateProduct.countInStock,
       discount: stateProduct.discount,
-      gift: stateProduct.gift
+      gift: stateProduct.gift,
+      brand:stateProduct.brand === 'add_brand' ? stateProduct.newBrand : stateProduct.brand,
+      partBody: stateProduct.partBody === 'add_partBody' ? stateProduct.newPartBody : stateProduct.partBody,
+      image1: stateProduct.image1,
+      image2: stateProduct.image2,
+      image3: stateProduct.image3,
+      image4: stateProduct.image4,
     }
     mutation.mutate(params, {
       onSettled: () => {
@@ -444,13 +493,24 @@ const AdminProduct = () => {
     })
   }
 
-  const handleChangeSelect = (value) => {
+  const handleChangeSelectType = (value) => {
       setStateProduct({
         ...stateProduct,
-        type: value
+        type: value,
       })
   }
-
+  const handleChangeSelectBrand = (value) => {
+    setStateProduct({
+      ...stateProduct,
+      brand: value
+    })
+}
+const handleChangeSelectPartBody = (value) => {
+  setStateProduct({
+    ...stateProduct,
+    partBody: value
+  })
+}
   return (
     <div>
       <WrapperHeader>Quản lý sản phẩm</WrapperHeader>
@@ -490,11 +550,10 @@ const AdminProduct = () => {
             >
               <Select
                 name="type"
-                // defaultValue="lucy"
-                // style={{ width: 120 }}
+              
                 value={stateProduct.type}
-                onChange={handleChangeSelect}
-                options={renderOptions(typeProduct?.data?.data)}
+                onChange={handleChangeSelectType}
+                options={renderOptions(typeProduct?.data?.data,1)}
                 />
             </Form.Item>
             {stateProduct.type === 'add_type' && (
@@ -504,6 +563,50 @@ const AdminProduct = () => {
                 rules={[{ required: true, message: 'Please input your type!' }]}
               >
                 <InputComponent value={stateProduct.newType} onChange={handleOnchange} name="newType" />
+              </Form.Item>
+            )}
+            <Form.Item
+              label="Brand"
+              name="brand"
+              rules={[{ required: true, message: 'Please input your brand!' }]}
+            >
+              <Select
+                name="brand"
+              
+                value={stateProduct.brand}
+                onChange={handleChangeSelectBrand}
+                options={renderOptions(brandProduct?.data?.data,2)}
+                />
+            </Form.Item>
+            {stateProduct.type === 'add_brand' && (
+              <Form.Item
+                label='New brand'
+                name="newBrand"
+                rules={[{ required: true, message: 'Please input your brand!' }]}
+              >
+                <InputComponent value={stateProduct.newBrand} onChange={handleOnchange} name="newBrand" />
+              </Form.Item>
+            )}
+            <Form.Item
+              label="PartBody"
+              name="partBody"
+              rules={[{ required: true, message: 'Please input your partBody!' }]}
+            >
+              <Select
+                name="partBody"
+              
+                value={stateProduct.partBody}
+                onChange={handleChangeSelectPartBody}
+                options={renderOptions(partBodyProduct?.data?.data,3)}
+                />
+            </Form.Item>
+            {stateProduct.partBody === 'add_partBody' && (
+              <Form.Item
+                label='New partBody'
+                name="newPartBody"
+                rules={[{ required: true, message: 'Please input your partBody!' }]}
+              >
+                <InputComponent value={stateProduct.newPartBody} onChange={handleOnchange} name="newPartBody" />
               </Form.Item>
             )}
             <Form.Item
@@ -567,6 +670,78 @@ const AdminProduct = () => {
                 )}
               </WrapperUploadFile>
             </Form.Item>
+            <Form.Item
+              label="Image1"
+              name="image1"
+              rules={[{message: 'Please input your count image1!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProduct?.image1 && (
+                  <img src={stateProduct?.image1} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image2"
+              name="image2"
+              rules={[{message: 'Please input your count image2!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProduct?.image2 && (
+                  <img src={stateProduct?.image2} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image3"
+              name="image3"
+              rules={[{message: 'Please input your count image3!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProduct?.image3 && (
+                  <img src={stateProduct?.image3} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image4"
+              name="image4"
+              rules={[{message: 'Please input your count image4!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProduct?.image4 && (
+                  <img src={stateProduct?.image4} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
             <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
               <Button type="primary" htmlType="submit">
                 Submit
@@ -586,7 +761,7 @@ const AdminProduct = () => {
             <Form.Item
               label="Name"
               name="name"
-              rules={[{ required: true, message: 'Please input your name!' }]}
+              rules={[{ message: 'Please input your name!' }]}
             >
               <InputComponent value={stateProductDetails['name']} onChange={handleOnchangeDetails} name="name" />
             </Form.Item>
@@ -594,61 +769,147 @@ const AdminProduct = () => {
             <Form.Item
               label="Type"
               name="type"
-              rules={[{ required: true, message: 'Please input your type!' }]}
+              rules={[{ message: 'Please input your type!' }]}
             >
               <InputComponent value={stateProductDetails['type']} onChange={handleOnchangeDetails} name="type" />
             </Form.Item>
             <Form.Item
+              label="Brand"
+              name="brand"
+              rules={[{ message: 'Please input your brand!' }]}
+            >
+              <InputComponent value={stateProductDetails['brand']} onChange={handleOnchangeDetails} name="brand" />
+            </Form.Item>
+            <Form.Item
+              label="PartBody"
+              name="partBody"
+              rules={[{ message: 'Please input your partBody!' }]}
+            >
+              <InputComponent value={stateProductDetails['partBody']} onChange={handleOnchangeDetails} name="partBody" />
+            </Form.Item>
+            <Form.Item
               label="Count inStock"
               name="countInStock"
-              rules={[{ required: true, message: 'Please input your count inStock!' }]}
+              rules={[{ message: 'Please input your count inStock!' }]}
             >
               <InputComponent value={stateProductDetails.countInStock} onChange={handleOnchangeDetails} name="countInStock" />
             </Form.Item>
             <Form.Item
               label="Price"
               name="price"
-              rules={[{ required: true, message: 'Please input your count price!' }]}
+              rules={[{ message: 'Please input your count price!' }]}
             >
               <InputComponent value={stateProductDetails.price} onChange={handleOnchangeDetails} name="price" />
             </Form.Item>
             <Form.Item
               label="Description"
               name="description"
-              rules={[{ required: true, message: 'Please input your count description!' }]}
+              rules={[{ message: 'Please input your count description!' }]}
             >
               <InputComponent value={stateProductDetails.description} onChange={handleOnchangeDetails} name="description" />
             </Form.Item>
             <Form.Item
               label="Rating"
               name="rating"
-              rules={[{ required: true, message: 'Please input your count rating!' }]}
+              rules={[{ message: 'Please input your count rating!' }]}
             >
               <InputComponent value={stateProductDetails.rating} onChange={handleOnchangeDetails} name="rating" />
             </Form.Item>
             <Form.Item
               label="Discount"
               name="discount"
-              rules={[{ required: true, message: 'Please input your discount of product!' }]}
+              rules={[{ message: 'Please input your discount of product!' }]}
             >
               <InputComponent value={stateProductDetails.discount} onChange={handleOnchangeDetails} name="discount" />
             </Form.Item>
             <Form.Item
               label="Gift"
               name="gift"
-              rules={[{ required: true, message: 'Please input your gift of product!' }]}
+              rules={[{ message: 'Please input your gift of product!' }]}
             >
               <InputComponent value={stateProductDetails.gift} onChange={handleOnchangeDetails} name="gift" />
             </Form.Item>
             <Form.Item
               label="Image"
               name="image"
-              rules={[{ required: true, message: 'Please input your count image!' }]}
+              rules={[{ message: 'Please input your count image!' }]}
             >
               <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
                 <Button >Select File</Button>
                 {stateProductDetails?.image && (
                   <img src={stateProductDetails?.image} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image1"
+              name="image1"
+              rules={[{ message: 'Please input your count image1!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProductDetails?.image1 && (
+                  <img src={stateProductDetails?.image1} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image2"
+              name="image2"
+              rules={[{ message: 'Please input your count image2!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProductDetails?.image2 && (
+                  <img src={stateProductDetails?.image2} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image3"
+              name="image3"
+              rules={[{ message: 'Please input your count image3!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProductDetails?.image3 && (
+                  <img src={stateProductDetails?.image3} style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '10px'
+                  }} alt="avatar" />
+                )}
+              </WrapperUploadFile>
+            </Form.Item>
+            <Form.Item
+              label="Image4"
+              name="image4"
+              rules={[{ message: 'Please input your count image4!' }]}
+            >
+              <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                <Button >Select File</Button>
+                {stateProductDetails?.image4 && (
+                  <img src={stateProductDetails?.image4} style={{
                     height: '60px',
                     width: '60px',
                     borderRadius: '50%',

@@ -17,7 +17,7 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([])
     const [panigate, setPanigate] = useState({
         page: 0,
-        limit: 8,
+        limit: 12,
         total: 1,
     })
     const fetchProductType = async (type, page, limit) => {
@@ -31,6 +31,7 @@ const ProductsPage = () => {
 
         }
     }
+    console.log('first', panigate)
     useEffect(() => {
         if(state){
             fetchProductType(state, panigate.page, panigate.limit)
@@ -45,46 +46,13 @@ const ProductsPage = () => {
             limit: pageSize
         });
     }
-    const items = [
-        {
-            key: '1',
-            label: 'Bán chạy',
-          },
-          {
-            key: '2',
-            label: 'Mới nhất',
-          },
-          {
-            key: '3',
-            label: 'Giá giảm dần',
-          },
-          {
-            key: '4',
-            label: 'Giá tăng dần',
-          },
-          {
-            key: '5',
-            label: 'Từ A-Z',
-          },
-          {
-            key: '6',
-            label: 'Từ Z-A',
-          },
-        ];
   return (
     <div>
       <Container>
         <Row style={{margin: '10px 30px'}}>
           <Col span={18} push={6}>
-          <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
-            <div style={{display: 'flex',flexWrap: 'wrap',gap: '5px'}}>
-                {products?.filter((pro) => {
-                    if(searchDebounce === '') {
-                        return pro
-                    }else if(pro?.name?.toLowerCase()?.includes(searchDebounce?.toLowerCase())) {
-                        return pro
-                    }
-                })?.map((product) => {
+            <div style={{display: 'flex' ,flexWrap: 'wrap', gap: '5px'}}>
+             {products?.map((product) => {
                     return (
                     <CardProductComponent
                         key={product._id}
@@ -105,13 +73,45 @@ const ProductsPage = () => {
             <Pagination current={panigate.page + 1} total={panigate.total*10} onChange={onChange} style={{ textAlign: 'center', marginTop: '10px' }} />
           </Col>
           <Col span={6} pull={18} style={{textAlign: 'center'}}>
-            <div className="category">
+            {/* <div className="category">
               <h3>Danh mục</h3>
-              {/* <h4>{selectedProductTypeLabel}</h4> */}
+              <h4>{selectedProductTypeLabel}</h4>
             </div>
-              <div className='Fillter'>
-                
-              </div>
+              <div className='FillterPrice'>
+                <Menu
+                  style={{
+                    width: 256,
+                    textAlign: 'center',
+                  }}
+                  defaultSelectedKeys={['1']}
+                  defaultOpenKeys={['sub1']}
+                  mode={mode}
+                  theme={theme}
+                >
+                  {items.map((menuItem) => (
+                    <Menu.SubMenu
+                    key={menuItem.key}
+                    title={menuItem.label}
+                    className={menuItem.key === 'sub1' ? 'priceSubMenu' : ''}
+                    overflowedIndicator={<span>&gt;</span>}
+                  >
+                      {menuItem.children.map((option, index) => (
+                        // Hiển thị chỉ một số options (ví dụ: 10) và ẩn đi options còn lại trong thanh cuộn
+                        index < 10 && (
+                          <Menu.Item key={option.key}>
+                            <Checkbox
+                              onChange={() => handleCheckboxChange(option.key)}
+                              checked={selectedOptions.includes(option.key)}
+                            >
+                              {option.label}
+                            </Checkbox>
+                          </Menu.Item>
+                        )
+                      ))}
+                    </Menu.SubMenu>
+                  ))}
+                </Menu>
+              </div> */}
           </Col>
         </Row>
       </Container>

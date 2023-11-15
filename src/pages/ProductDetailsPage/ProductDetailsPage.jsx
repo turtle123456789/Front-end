@@ -1,7 +1,7 @@
   import React , { useEffect, useState }from 'react'
   import { Container } from '../../components/ContainerComponent/ContainerComponent'
-  import {  Choice, InforProduct, Parameters, ProductDetails, QuantityBuy, WatchProduct } from './style'
-  import { Col, Rate, Row, Tabs } from 'antd'
+  import {  Choice, InforProduct, Parameters, ProductDetails, QuantityBuy, WatchProduct, WrapperInputNumber, WrapperQualityProduct } from './style'
+  import { Col, Rate, Row, Tabs, message } from 'antd'
   import Slider from 'react-slick';
   import img1 from '../../assets/images/ProductDetail (1).webp'
   import img2 from '../../assets/images/ProductDetail (2).webp'
@@ -11,7 +11,7 @@
   import iconWhiteHeart from '../../assets/images/icon-heart.svg'
   import iconShopingCar from '../../assets/images/icon-shopping_cart.svg'
   import { LevelOfLiking, ProductPrice } from '../../components/CardProductComponent/style';
-  import { Link, useLocation, useParams} from 'react-router-dom';
+  import { Link, useLocation, useNavigate, useParams} from 'react-router-dom';
   import {
       MinusOutlined,
       PlusOutlined,
@@ -23,6 +23,7 @@
   import { useDispatch, useSelector } from 'react-redux';
   import { initFacebookSDK } from '../../utils';
   import { useQuery } from '@tanstack/react-query';
+import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
   const ProductDetailsPage = ( ) => {
       const Params  = useParams(); 
       const idProduct = Params.productId
@@ -42,6 +43,7 @@
       const {data: products}= useQuery(['products'], fetchProductAll,{retry: 1,retryDelay: 1000})
       const [numProduct, setNumProduct] = useState(1)
       const user = useSelector((state) => state.user)
+      const navigate = useNavigate()
       const order = useSelector((state) => state.order)
       const [errorLimitOrder,setErrorLimitOrder] = useState(false)
       const location = useLocation()
@@ -53,24 +55,74 @@
     }, [])
 
       const [currentImage, setCurrentImage] = useState(img1);
-
+      const onChange = (value) => { 
+        setNumProduct(Number(value))
+    } 
+    
+    const handleChangeCount = (type, limited) => {
+      if(type === 'increase') {
+          if(!limited) {
+              setNumProduct(numProduct + 1)
+          }
+      }else {
+          if(!limited) {
+              setNumProduct(numProduct - 1)
+          }
+      }
+  }
       const percentages = Math.round(productDetails?.percentage)
       const save = (productDetails?.price - productDetails?.discount)
-      const [count, setCount] = useState(0);
-      const decreaseCount = () => {
-          if (count > 0) {
-            setCount(count - 1);
-       
+      useEffect(() => {
+        const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id) 
+        if((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
+            setErrorLimitOrder(false)
+        } else if(productDetails?.countInStock === 0){
+            setErrorLimitOrder(true)
+        }
+    },[numProduct])
+
+    useEffect(() => {
+        if(order.isSucessOrder) {
+            message.success('Đã thêm vào giỏ hàng')
+        }
+        return () => {
+            dispatch(resetOrder())
+        }
+    }, [order.isSucessOrder])
+
+    const handleAddOrderProduct = () => {
+      if(!user?.id) {
+          navigate('/sign-in', {state: location?.pathname})
+      }else {
+          // {
+          //     name: { type: String, required: true },
+          //     amount: { type: Number, required: true },
+          //     image: { type: String, required: true },
+          //     price: { type: Number, required: true },
+          //     product: {
+          //         type: mongoose.Schema.Types.ObjectId,
+          //         ref: 'Product',
+          //         required: true,
+          //     },
+          // },
+          const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
+          if((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
+              dispatch(addOrderProduct({
+                  orderItem: {
+                      name: productDetails?.name,
+                      amount: numProduct,
+                      image: productDetails?.image,
+                      price: productDetails?.price,
+                      product: productDetails?._id,
+                      discount: productDetails?.discount,
+                      countInstock: productDetails?.countInStock
+                  }
+              }))
+          } else {
+              setErrorLimitOrder(true)
           }
-        };
-      
-        const increaseCount = () => {
-          setCount(count + 1);
-        };
-      const onChange = (key) => {
-          console.log(key);
-        };
-        
+      }
+  }
       const settings = {  
           infinite: true, // Vòng lặp vô tận
           speed: 1000, // Tốc độ trượt
@@ -114,17 +166,14 @@
                 <Parameters>
                   <div className="name">
                       <li>Barcode</li>
-                      <li>Thương hiện</li>
-                      <li>Xuất xứ</li>
-                      <li>Loại da</li>
-                      <li>Giới tính</li>
+                      <li>Thương hiệu</li>
+                      <li>Công dụng</li>
+      
                   </div>
                   <div className="content">
                       <li>{productDetails?.barcode}</li>
                       <li>{productDetails?.brand}</li>
-                      <li>{productDetails?.origin}</li>
                       <li>{productDetails?.type}</li>
-                      <li>{productDetails?.sex}</li>
                   </div>
                 </Parameters>
               </div>
@@ -154,11 +203,11 @@
                           <WatchProduct>
                           <img src={productDetails?.image} alt="" />
                           <Slider {...settings}>
-                              <img src={img2} alt="" onClick={() => handleImageClick(img2)} />
-                              <img src={img3} alt="" onClick={() => handleImageClick(img3)} />
-                              <img src={img4} alt="" onClick={() => handleImageClick(img4)} />
-                              <img src={img5} alt="" onClick={() => handleImageClick(img5)} />
-                              <img src={img2} alt="" onClick={() => handleImageClick(img2)} />
+                              <img src={productDetails?.image} alt="" onClick={() => handleImageClick(img2)} />
+                              <img src={productDetails?.image1} alt="" onClick={() => handleImageClick(img3)} />
+                              <img src={productDetails?.image2} alt="" onClick={() => handleImageClick(img4)} />
+                              <img src={productDetails?.image3} alt="" onClick={() => handleImageClick(img5)} />
+                              <img src={productDetails?.image4} alt="" onClick={() => handleImageClick(img2)} />
                           </Slider>
                           </WatchProduct>
                       </Col>
@@ -196,15 +245,23 @@
                           <span style={{fontWeight: 600}}>Số lượng:</span>
                           <br /><br />
                           <QuantityBuy>
-                              <button onClick={decreaseCount}><MinusOutlined/></button>
-                              <span className="count">{count}</span>
-                              <button onClick={increaseCount}><PlusOutlined/></button>
+                          <WrapperQualityProduct>
+                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',numProduct === 1)}>
+                                <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
+                            </button>
+                            <WrapperInputNumber onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
+                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase',  numProduct === productDetails?.countInStock)}>
+                                <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
+                            </button>
+                        </WrapperQualityProduct>
                           </QuantityBuy>
                           <br /><br /><br /><br />
                           <Choice>
-                              <button className="addCart">
+                              <button className="addCart"  onClick={handleAddOrderProduct}>
                               <ShoppingCartOutlined /> Thêm vào giỏ hàng
                               </button>
+                              {errorLimitOrder && <div style={{color: 'red'}}>San pham het hang</div>}
+
                               <button className="buyNow">
                               <WalletOutlined /> Mua ngay
                               </button>

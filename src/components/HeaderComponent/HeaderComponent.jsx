@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import posterMain from '../../assets/images/posterMain.webp'
-import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout, AccountUser} from './style'
+import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout, AccountUser, WrapperTextHeaderSmall} from './style'
 import logoMain from '../../assets/images/logoMain.png'
 import iconPhone from '../../assets/images/icon-telephone.svg'
 import iconAccount from '../../assets/images/icon-login.svg'
@@ -9,22 +9,25 @@ import iconShopCar from '../../assets/images/icon-shopping_cart.svg'
 import { FormSearch } from './style'
 import '../../index.css'
 import {
-  SearchOutlined
+  SearchOutlined, ShoppingCartOutlined
 } from '@ant-design/icons';
 import { Container } from '../ContainerComponent/ContainerComponent'
-import { Button, Col, Input, Popover, Row } from 'antd'
-import { Link } from 'react-router-dom'
+import { Badge, Button, Col, Input, Popover, Row } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {useDispatch} from 'react-redux'
 import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/userSlide'
 import { searchProduct } from '../../redux/slides/productSlide'
 const HeaderComponent = () => {
+  const order = useSelector((state) => state.order)
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
   const [search,setSearch] = useState('')
+  const navigate = useNavigate()
+  const [isOpenPopup, setIsOpenPopup] = useState(false)
   const handleLogout = async() =>{
     await UserService.logOutUser
     dispatch(resetUser())
@@ -36,12 +39,29 @@ const HeaderComponent = () => {
   const content = (
     <div>
         <Logout onClick={handleLogout}>Đăng xuất</Logout>
-        <Link to="/profile-user"><Logout>Thông tin người dùng</Logout></Link>
+        <Logout onClick={() => handleClickNavigate('profile')}>Thông tin người dùng</Logout>
         {user?.isAdmin && (
-          <Link to="/system/admin"><Logout>Quản lý hệ thống</Logout></Link>
+          <Logout onClick={() => handleClickNavigate('admin')}>Quản lý hệ thống</Logout>
         )}
+         <Logout onClick={() => handleClickNavigate(`my-order`)}>Giỏ hàng của tôi</Logout>
     </div>
   );
+  const handleClickNavigate = (type) => {
+    if(type === 'profile') {
+      navigate('/profile-user')
+    }else if(type === 'admin') {
+      navigate('/system/admin')
+    }else if(type === 'my-order') {
+      navigate('/my-order',{ state : {
+          id: user?.id,
+          token : user?.access_token
+        }
+      })
+    }else {
+      handleLogout()
+    }
+    setIsOpenPopup(false)
+  }
   const onSearch = (e) => {
     setSearch(e.target.value)
 
@@ -98,9 +118,13 @@ const HeaderComponent = () => {
                   </div>
                 )}
               </AccountUser>
-              <Link to="/CartPage">
-                <img src={iconShopCar} alt=""/>
-              </Link>
+
+                <Link to = "/order">
+                  <Badge count={order?.orderItems?.length} size="small">
+                    <ShoppingCartOutlined style={{ fontSize: '30px'}} />
+                  </Badge>
+                  <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
+                </Link>
           </MenuMain>
         </Container>
     </div>

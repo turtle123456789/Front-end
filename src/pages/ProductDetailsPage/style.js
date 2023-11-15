@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import '../../index.css'
+import { InputNumber } from "antd";
 export const ProductDetails = styled.div`
     margin: 0 30px;
     .AddrestProduct{
@@ -79,4 +80,23 @@ export const Parameters = styled.div`
         border: 1px solid #F4F4F4;
         padding: 10px;
     }
+`
+export const WrapperQualityProduct = styled.div`
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    width: 120px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+`
+
+export const WrapperInputNumber = styled(InputNumber)`
+    &.ant-input-number.ant-input-number-sm {
+        width: 40px;
+        border-top: none;
+        border-bottom: none;
+        .ant-input-number-handler-wrap {
+            display: none !important;
+        }
+    };
 `

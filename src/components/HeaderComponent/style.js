@@ -94,3 +94,8 @@ export const AccountUser = styled.div`
         cursor: pointer;
     }
 `
+export const WrapperTextHeaderSmall = styled.span`
+    font-size: 12px;
+    color: var(--black);
+    white-space: nowrap;
+`

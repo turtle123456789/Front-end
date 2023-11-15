@@ -1,18 +1,19 @@
 import React from 'react'
 import { TypeProduct } from './style'
 
-const CardTypeProductComponent = ({typeProduct}) => {
+const CardTypeProductComponent = ({typeProducts}) => {
+    console.log('first', typeProducts)
   return (
     <div>
         <TypeProduct>
             <div className="type-products_img">
-                <img src={typeProduct.image} alt=""/>
+                <img  alt=""/>
             </div>
             <div className="type-products_name">
-                <h3>{typeProduct.name}</h3>
+                <h3>{typeProducts}</h3>
             </div>
             <div className="type-products_quantity">
-                <span>{typeProduct.quantity} sản phẩm</span>
+                <span> sản phẩm</span>
             </div>
         </TypeProduct>
     </div>

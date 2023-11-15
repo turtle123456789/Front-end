@@ -24,15 +24,13 @@ import image10 from '../../assets/images/image(10).webp'
 import posterSupport from '../../assets/images/poster1.webp'
 import HeaderSaleComponent from '../../components/HeaderSaleComponent/HeaderSaleComponent'
 import SlideProductComponent from '../../components/SlideProductComponent/SlideProductComponent'
-import { typeProductData } from '../../Data/TypeProductData'
 import SlideBrandComponent from '../../components/SlideBrandComponent/SlideBrandComponent'
-import { brandsData } from '../../components/BrandData'
 import { TopHeader } from '../../components/HeaderComponent/style'
-import LayoutTypeProductComponent from '../../components/LayoutTypeProductComponent/LayoutTypeProductComponent'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import "./style.css";
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent'
+import CardTypeProductComponent from '../../components/CardTypeProductComponent/CardTypeProductComponent'
 const HomePage = () => {
   const [limit, setLimit] = useState(10)
   const fetchProductAll = async (context) => {
@@ -43,8 +41,13 @@ const HomePage = () => {
     return res
 
   }
+  const fetchAllTypeProduct = async () => {
+    const res = await ProductService.getAllTypeProduct()
+    return res
+  }
+  const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
   const {data: products}= useQuery(['products', limit], fetchProductAll,{retry: 3,retryDelay: 1000})
-
+console.log('typeProduct', typeProduct?.data?.data)
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuTimeout, setMenuTimeout] = useState(null); 
   const handleMouseEnter = (index) => {
@@ -346,17 +349,23 @@ const HomePage = () => {
        <SlideProductComponent products={products} />
        
         <br /><br />
-        <div style={{margin: '20px 30px'}}>
+        {/* <div style={{margin: '20px 30px'}}>
           <h2>DANH MỤC SẢN PHẨM</h2>
-          <LayoutTypeProductComponent TypeProductData={typeProductData} />
-        </div>
+          {typeProduct?.data?.data.map((product,limit) => {
+              return (
+                <CardTypeProductComponent
+                typeProducts={product}
+                />
+              )
+            })}
+        </div> */}
         <BrandProduct>
           <BrandProductName>
             <h1>THƯƠNG HIỆU NỔI BẬT</h1>
             <p>BoShop tự hào là Đại lí phân phối chính thức của hơn 100 thương hiệu mỹ phẩm hàng đầu</p>
             <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xem tất cả thương hiệu*7+</a>
           </BrandProductName>
-          <SlideBrandComponent brands={brandsData}/>
+          {/* <SlideBrandComponent /> */}
         </BrandProduct>
         <img src={posterSupport} alt=""  style={TopHeader}/>
         <div style={{position: 'relative' ,margin: '20px 30px'}}>
