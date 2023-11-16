@@ -19,6 +19,7 @@ import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import "./style.css";
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent'
+import { Link } from 'react-router-dom'
 const HomePage = () => {
   const [limit, setLimit] = useState(10)
   const fetchProductAll = async (context) => {

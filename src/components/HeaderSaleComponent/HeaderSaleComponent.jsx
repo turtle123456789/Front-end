@@ -2,6 +2,7 @@ import React from 'react'
 import {  HeaderSaleTime, SaleTimeLeft, SaleTimeRight } from './style'
 import thunder1 from '../../assets/images/thunder 1.svg'
 import SaleTimer from './TimeSale'
+import { Link } from 'react-router-dom'
 
 const HeaderSaleComponent = () => {
   return (
