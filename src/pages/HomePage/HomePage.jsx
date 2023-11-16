@@ -64,139 +64,139 @@ const HomePage = () => {
           <MenuBenefits>
             <li onMouseEnter={() => handleMouseEnter(0)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconHair} alt="" />
                 <span>Chăm sóc tóc & da đầu</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>
+              </Link>
               {activeIndex === 0 && (
               <CategoryMenuBenefits show={activeIndex === 0}>
 
                 <ul>
                   <br />  
                   <span>Dầu gội- Dầu xả</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gàu</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị gãy rụng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị tóc bạc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm mượt tóc</a></li>
+                  <li><Link to="/">Trị gàu</Link></li>
+                  <li><Link to="/">Trị gãy rụng</Link></li>
+                  <li><Link to="/">Trị tóc bạc</Link></li>
+                  <li><Link to="/">Làm mượt tóc</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Kem ủ</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ phục hồi tóc hư tổn</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc nhuộm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem ủ cho tóc uốn</a></li>
+                  <li><Link to="/">Kem ủ phục hồi tóc hư tổn</Link></li>
+                  <li><Link to="/">Kem ủ cho tóc nhuộm</Link></li>
+                  <li><Link to="/">Kem ủ cho tóc uốn</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Dầu dưỡng tóc</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Keo xịt tóc</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Thuốc nhuộm</a></li>
+                  <li><Link to="/">Keo xịt tóc</Link></li>
+                  <li><Link to="/">Thuốc nhuộm</Link></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
             </li>
             <li onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconAntiAge} alt="" />
                 <span>Chăm sóc da mặt</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>
+              </Link>
               {activeIndex === 1 && (
               <CategoryMenuBenefits show={activeIndex === 1}>
                 <ul>
                   <br />
                   <span>Chống nắng</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dưỡng ẩm/Lotion</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Mặt nạ</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy tế bào chết</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xịt khoáng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tinh chất/Serum</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sữa rửa mặtToner</a></li>
+                  <li><Link to="/">Dưỡng ẩm/Lotion</Link></li>
+                  <li><Link to="/">Mặt nạ</Link></li>
+                  <li><Link to="/">Tẩy tế bào chết</Link></li>
+                  <li><Link to="/">Xịt khoáng</Link></li>
+                  <li><Link to="/">Tinh chất/Serum</Link></li>
+                  <li><Link to="/">Sữa rửa mặtToner</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Công dụng</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm sáng da</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Làm dịu da</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Chống lão hoá</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Giảm nếp nhăn</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Cấp ẩm - Cấp nước</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Giữ ẩm Trị mụn - thâm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị nám - Tàn nhang</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị sẹo</a></li>
+                  <li><Link to="/">Làm sáng da</Link></li>
+                  <li><Link to="/">Làm dịu da</Link></li>
+                  <li><Link to="/">Chống lão hoá</Link></li>
+                  <li><Link to="/">Giảm nếp nhăn</Link></li>
+                  <li><Link to="/">Cấp ẩm - Cấp nước</Link></li>
+                  <li><Link to="/">Giữ ẩm Trị mụn - thâm</Link></li>
+                  <li><Link to="/">Trị nám - Tàn nhang</Link></li>
+                  <li><Link to="/">Trị sẹo</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Tẩy trang</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Khăn/Bông tẩy trang</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy trang cho mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy trang mặt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy trang môi</a></li>
+                  <li><Link to="/">Khăn/Bông tẩy trang</Link></li>
+                  <li><Link to="/">Tẩy trang cho mắt</Link></li>
+                  <li><Link to="/">Tẩy trang mặt</Link></li>
+                  <li><Link to="/">Tẩy trang môi</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Chăm sóc mắt</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Thuốc nhỏ mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Mặt nạ mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dưỡng mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dưỡng mi mắt / chân mày</a></li>
+                  <li><Link to="/">Thuốc nhỏ mắt</Link></li>
+                  <li><Link to="/">Mặt nạ mắt</Link></li>
+                  <li><Link to="/">Dưỡng mắt</Link></li>
+                  <li><Link to="/">Dưỡng mi mắt / chân mày</Link></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
             </li>
             <li onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconMakeup} alt="" />
                 <span>Trang điểm</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>  
+              </Link>  
               {activeIndex === 2 && (
               <CategoryMenuBenefits show={activeIndex === 2}>
                 <ul>
                   <br />
                   <span>Trang điểm mặt</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>BB - CC - DD Cream</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Che khuyết điểm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dầu lót - Gel lót</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem lót</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem nền</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Phấn nền</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Má hồng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xịt trang điểm</a></li>
+                  <li><Link to="/">BB - CC - DD Cream</Link></li>
+                  <li><Link to="/">Che khuyết điểm</Link></li>
+                  <li><Link to="/">Dầu lót - Gel lót</Link></li>
+                  <li><Link to="/">Kem lót</Link></li>
+                  <li><Link to="/">Kem nền</Link></li>
+                  <li><Link to="/">Phấn nền</Link></li>
+                  <li><Link to="/">Má hồng</Link></li>
+                  <li><Link to="/">Xịt trang điểm</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Trang điểm mắt</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kẻ chân mày</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Che khuyến điểm mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem lót mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kẻ mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Phấn mắt</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Mascara</a></li>
+                  <li><Link to="/">Kẻ chân mày</Link></li>
+                  <li><Link to="/">Che khuyến điểm mắt</Link></li>
+                  <li><Link to="/">Kem lót mắt</Link></li>
+                  <li><Link to="/">Kẻ mắt</Link></li>
+                  <li><Link to="/">Phấn mắt</Link></li>
+                  <li><Link to="/">Mascara</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Trang điểm môi</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kẻ viền môi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy tế bào chết môi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Mặt nạ cho môi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Son dưỡng môi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Son bóng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Son lì</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Son High End</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Che khuyết điểm môi</a></li>
+                  <li><Link to="/">Kẻ viền môi</Link></li>
+                  <li><Link to="/">Tẩy tế bào chết môi</Link></li>
+                  <li><Link to="/">Mặt nạ cho môi</Link></li>
+                  <li><Link to="/">Son dưỡng môi</Link></li>
+                  <li><Link to="/">Son bóng</Link></li>
+                  <li><Link to="/">Son lì</Link></li>
+                  <li><Link to="/">Son High End</Link></li>
+                  <li><Link to="/">Che khuyết điểm môi</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Dụng cụ trang điểm</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Cọ/Dụng cụ trang điểm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Mút trang điểm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nhíp/Dao cạo</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Bấm mi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Lông mi giả</a></li>
+                  <li><Link to="/">Cọ/Dụng cụ trang điểm</Link></li>
+                  <li><Link to="/">Mút trang điểm</Link></li>
+                  <li><Link to="/">Nhíp/Dao cạo</Link></li>
+                  <li><Link to="/">Bấm mi</Link></li>
+                  <li><Link to="/">Lông mi giả</Link></li>
                   
                 </ul>
               </CategoryMenuBenefits >
@@ -204,79 +204,79 @@ const HomePage = () => {
             </li>
             <li onMouseEnter={() => handleMouseEnter(3)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconPersonalHygiene} alt="" />
                 <span>Chăm sóc cơ thể</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>
+              </Link>
               {activeIndex === 3 && (
               <CategoryMenuBenefits show={activeIndex === 3}>
                 <ul>
                   <br />
                   <span>Dưỡng thể</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sữa tắm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tẩy tế bào chết Body</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Chống nắng body</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xà bông tắm</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Tinh dầu</a></li>
+                  <li><Link to="/">Sữa tắm</Link></li>
+                  <li><Link to="/">Tẩy tế bào chết Body</Link></li>
+                  <li><Link to="/">Chống nắng body</Link></li>
+                  <li><Link to="/">Xà bông tắm</Link></li>
+                  <li><Link to="/">Tinh dầu</Link></li>
 
                 </ul>
                 <ul>
                   <br />
                   <span>Chăm sóc răng miệng</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Kem đánh răng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Bàn chải đánh răng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước súc miệng</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Trị hôi miệng</a></li>
+                  <li><Link to="/">Kem đánh răng</Link></li>
+                  <li><Link to="/">Bàn chải đánh răng</Link></li>
+                  <li><Link to="/">Nước súc miệng</Link></li>
+                  <li><Link to="/">Trị hôi miệng</Link></li>
                 </ul>
                 <ul>
                   <br />
                   <span>Khử mùi</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Lăn khử mùi</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Sáp khử mùi</a></li>
+                  <li><Link to="/">Lăn khử mùi</Link></li>
+                  <li><Link to="/">Sáp khử mùi</Link></li>
                 </ul>                
                 <ul>
                   <br />
                   <span>Vệ sinh phụ nữ</span>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Băng vệ sinh</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Dung dịch vệ sinh</a></li>
+                  <li><Link to="/">Băng vệ sinh</Link></li>
+                  <li><Link to="/">Dung dịch vệ sinh</Link></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
             </li>
             <li onMouseEnter={() => handleMouseEnter(4)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconPerfumeBottle} alt="" />
                 <span>Nước hoa</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>
+              </Link>
               {activeIndex === 4 && (
               <CategoryMenuBenefits show={activeIndex === 4}>
                 <ul>
                   <br />
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa mini</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa nam</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa nữ</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Nước hoa Unisex</a></li>
+                  <li><Link to="/">Nước hoa mini</Link></li>
+                  <li><Link to="/">Nước hoa nam</Link></li>
+                  <li><Link to="/">Nước hoa nữ</Link></li>
+                  <li><Link to="/">Nước hoa Unisex</Link></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
             </li>
             <li onMouseEnter={() => handleMouseEnter(5)}
             onMouseLeave={handleMouseLeave}>
-              <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>
+              <Link to="/">
                 <img src={iconFunctionalFoods} alt="" />
                 <span>Thực phẩm chức năng</span>
                 <img src={iconVector} style={{marginLeft: 'auto'}} alt="" />
-              </a>
+              </Link>
               {activeIndex === 5 && (
               <CategoryMenuBenefits show={activeIndex === 5}>
                 <ul>
                   <br />
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ điều trị bệnh</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ giảm cân</a></li>
-                  <li><a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Hỗ trợ làm đẹp</a></li>
+                  <li><Link to="/">Hỗ trợ điều trị bệnh</Link></li>
+                  <li><Link to="/">Hỗ trợ giảm cân</Link></li>
+                  <li><Link to="/">Hỗ trợ làm đẹp</Link></li>
                 </ul>
               </CategoryMenuBenefits >
               )}
@@ -310,7 +310,7 @@ const HomePage = () => {
           <BrandProductName>
             <h1>THƯƠNG HIỆU NỔI BẬT</h1>
             <p>BoShop tự hào là Đại lí phân phối chính thức của hơn 100 thương hiệu mỹ phẩm hàng đầu</p>
-            <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xem tất cả thương hiệu*7+</a>
+            <Link to="/">Xem tất cả thương hiệu*7+</Link>
           </BrandProductName>
           {/* <SlideBrandComponent /> */}
         </BrandProduct>

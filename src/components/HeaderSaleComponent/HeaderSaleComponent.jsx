@@ -14,7 +14,7 @@ const HeaderSaleComponent = () => {
                 <SaleTimer/>
             </SaleTimeLeft>
             <SaleTimeRight>
-                <a href={"https://www.facebook.com/profile.php?id=100057094481241"}>Xem thêm</a>
+                <Link to="/Products">Xem thêm</Link>
             </SaleTimeRight>
         </HeaderSaleTime>
     </div>

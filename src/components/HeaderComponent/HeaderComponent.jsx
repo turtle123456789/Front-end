@@ -78,7 +78,7 @@ const HeaderComponent = () => {
             <Col span={24}><img src={posterMain} alt="poster"  style={TopHeader}/></Col>
           </Row>
           <MenuMain>
-            <a href={"/"}><img src={logoMain} alt="logo Shop" style={LogoShop}/></a>
+            <Link to="/"><img src={logoMain} alt="logo Shop" style={LogoShop}/></Link>
             <SearchProduct>
               <FormSearch >
                 <Input  onChange={onSearch}  autoComplete="on" placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>
