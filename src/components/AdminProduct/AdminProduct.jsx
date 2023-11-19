@@ -198,7 +198,7 @@ const AdminProduct = () => {
   const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
   const brandProduct = useQuery({ queryKey: ['brand-product'], queryFn: fetchAllBrandProduct })
   const partBodyProduct = useQuery({ queryKey: ['partBody-product'], queryFn: fetchAllPartBodyProduct })
-  const { isLoading: isLoadingProducts, data: products } = queryProduct
+  const { data: products } = queryProduct
   const renderAction = () => {
     return (
       <div>
@@ -518,7 +518,7 @@ const handleChangeSelectPartBody = (value) => {
         <Button style={{ height: '150px', width: '150px', borderRadius: '6px', borderStyle: 'dashed' }} onClick={() => setIsModalOpen(true)}><PlusOutlined style={{ fontSize: '60px' }} /></Button>
       </div>
       <div style={{ marginTop: '20px' }}>
-        <TableComponent handleDelteMany={handleDelteManyProducts} columns={columns} isLoading={isLoadingProducts} data={dataTable} onRow={(record, rowIndex) => {
+        <TableComponent handleDelteMany={handleDelteManyProducts} columns={columns} data={dataTable} onRow={(record, rowIndex) => {
           return {
             onClick: event => {
               setRowSelected(record._id)

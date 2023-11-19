@@ -23,6 +23,7 @@ const MyOrderPage = () => {
     enabled: state?.id && state?.token
   })
   const {  data } = queryOrder
+  console.log('data', data)
 
   const handleDetailsOrder = (id) => {
     navigate(`/details-order/${id}`, {

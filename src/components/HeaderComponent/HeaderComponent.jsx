@@ -1,24 +1,25 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import posterMain from '../../assets/images/posterMain.webp'
-import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout, AccountUser, WrapperTextHeaderSmall} from './style'
+import {MenuMain ,TopHeader , ChooseUse, LogoShop, SearchProduct, IconContact, Logout, AccountUser, WrapperTextHeaderSmall, ResultProduct, ListProduct} from './style'
 import logoMain from '../../assets/images/logoMain.png'
 import iconPhone from '../../assets/images/icon-telephone.svg'
 import iconAccount from '../../assets/images/icon-login.svg'
-import iconShopCar from '../../assets/images/icon-shopping_cart.svg'
 import { FormSearch } from './style'
 import '../../index.css'
+import * as ProductService from '../../services/ProductService'
 import {
   SearchOutlined, ShoppingCartOutlined
 } from '@ant-design/icons';
 import { Container } from '../ContainerComponent/ContainerComponent'
-import { Badge, Button, Col, Input, Popover, Row } from 'antd'
+import { Badge, Button, Col, Input, Popover, Row, Spin, TreeSelect, message } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {useDispatch} from 'react-redux'
 import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/userSlide'
-import { searchProduct } from '../../redux/slides/productSlide'
+import { WrapperHeaderItem } from '../../pages/MyOrder/style'
+import { convertPrice } from '../../utils'
 const HeaderComponent = () => {
   const order = useSelector((state) => state.order)
   const user = useSelector((state) => state.user)
@@ -26,6 +27,8 @@ const HeaderComponent = () => {
   const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
   const [search,setSearch] = useState('')
+  const [resultProduct, setResultProduct] = useState([])
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate()
   const [isOpenPopup, setIsOpenPopup] = useState(false)
   const handleLogout = async() =>{
@@ -63,14 +66,69 @@ const HeaderComponent = () => {
     }
     setIsOpenPopup(false)
   }
-  const onSearch = (e) => {
-    setSearch(e.target.value)
+  const fetchProduct = async (name) => {
+    const res = await ProductService.getAllProduct(name)
+    if(res?.status == 'OK') {
+      console.log('res?.data?.[0]?.name', res?.data?.[0]?.name)
+      setResultProduct(res?.data)
+    }
+    if(!res?.data?.[0]?.name){
+      message.error("Không có sản phẩm này")
+    }
 
   }
-  const handleSearchButtonClick = (e)=>{
+  useEffect(() => {
+    if (isSearching) {
+      fetchProduct(search);
+      // setIsSearching(false); 
+    }
+  }, [search, isSearching]);
 
-    dispatch(searchProduct(search))
+  const handleSearch = () => {
+    setIsSearching(true); 
+    const myElement = document.getElementById('result');
+
+  };
+  const renderProduct = (data) => {
+    return data?.map((product) => {
+      return <ListProduct key={product?._id} onClick={() => navigate(`/ProductDetails/${product?._id}`)}> 
+              <img src={product?.image} 
+                style={{
+                  width: '30px', 
+                  height: '30px', 
+                  objectFit: 'cover',
+                  border: '1px solid rgb(238, 238, 238)',
+                  padding: '2px'
+                }}
+              />
+              <div style={{
+                width: 260,
+                overflow: 'hidden',
+                textOverflow:'ellipsis',
+                whiteSpace:'nowrap',
+                marginLeft: '10px'
+              }}>{product?.name}</div>
+              <span style={{ fontSize: '13px', color: '#242424',marginLeft: 'auto' }}>{convertPrice(product?.price)}</span>
+            </ListProduct>
+          })
   }
+  const resultProductRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (resultProductRef.current && !resultProductRef.current.contains(event.target)) {
+        setIsSearching(false);
+      }
+    };
+  
+    // Attach the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+  
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [resultProductRef]);
+  
   return (
     <div>
         <Container>
@@ -81,9 +139,20 @@ const HeaderComponent = () => {
             <Link to="/"><img src={logoMain} alt="logo Shop" style={LogoShop}/></Link>
             <SearchProduct>
               <FormSearch >
-                <Input  onChange={onSearch}  autoComplete="on" placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>
-                <Button onClick={handleSearchButtonClick} type='primary' style={{height: '43px', width: '64px', background:'var(--pink)', borderRadius: '0 10px 10px 0'}}><SearchOutlined /></Button>
+                <Input onChange={(e) => setSearch(e.target.value)}  autoComplete="on" placeholder='Tìm kiếm...' style={{height: '43px', borderRadius: '10px 0 0 10px', background: 'rgba(203, 96, 136, 0.15)', border: 'none'}}></Input>
+                <Button onClick={handleSearch} type='primary' style={{height: '43px', width: '64px', background:'var(--pink)', borderRadius: '0 10px 10px 0'}}><SearchOutlined /></Button>
               </FormSearch>
+                <ResultProduct style={{ display: isSearching ? 'block' : 'none' }}
+                   ref={resultProductRef}>
+                  {resultProduct.length > 0 ?(
+                    renderProduct(resultProduct)
+                  ):(
+                    <div style={{textAlign: 'center', lineHeight: '95px'}}>
+                      <Spin />
+                    </div>
+                  )
+                  }
+                </ResultProduct>
               <ChooseUse>
                 <Link to="/ProductsPage/chamsoc da">Chăm sóc da</Link>
                 <Link to="/ProductsPage/kemchongnang">Kem chống nắng</Link>

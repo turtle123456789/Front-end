@@ -1,6 +1,6 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap');
 :root{
   --pink:#FFAEB4;
   --black:#000;
@@ -20,6 +20,7 @@ body{
   overflow-x: hidden;
 }
 html{
+  font-family: 'Roboto Condensed', sans-serif;
   font-size:  62.5%;
 }
 h1{

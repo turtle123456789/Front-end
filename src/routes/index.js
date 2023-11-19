@@ -1,6 +1,7 @@
 import AdminPage from "../pages/AdminPage/AdminPage";
 import OrderPage from "../pages/CartPage/CartPage";
 import CartPage from "../pages/CartPage/CartPage";
+import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
 import HomePage from "../pages/HomePage/HomePage";
 import MyOrderPage from "../pages/MyOrder/MyOrder";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
@@ -66,6 +67,11 @@ export const routes = [
     {
         path: '/profile-user',
         page: ProfilePage,
+        isShowHeader: true
+    },
+    {
+        path: '/details-order/:id',
+        page: DetailsOrderPage,
         isShowHeader: true
     },
     {

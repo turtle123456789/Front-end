@@ -252,10 +252,6 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
                               <ShoppingCartOutlined /> Thêm vào giỏ hàng
                               </button>
                               {errorLimitOrder && <div style={{color: 'red'}}>San pham het hang</div>}
-
-                              <button className="buyNow">
-                              <WalletOutlined /> Mua ngay
-                              </button>
                           </Choice>
                       </Col>
                   </Row>

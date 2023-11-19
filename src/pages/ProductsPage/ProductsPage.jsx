@@ -10,19 +10,19 @@ import { useDebounce } from '../../hooks/useDebounce'
 import * as ProductService from '../../services/ProductService'
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent';
 const ProductsPage = () => {
-    const searchProduct = useSelector((state) => state?.product?.search)
-    const searchDebounce = useDebounce(searchProduct, 500)
 
-    const state = useLocation()
     const [products, setProducts] = useState([])
+    const [choiceSort, setChoiceSort] = useState("countInStock")
+    const [choice, setChoice] = useState("asc")
+    const [activeTabKey, setActiveTabKey] = useState("1");
     const [panigate, setPanigate] = useState({
         page: 0,
         limit: 12,
         total: 1,
     })
-    const fetchProductType = async (type, page, limit) => {
+    const fetchProductType = async (sort, page, limit) => {
 
-        const res = await ProductService.getProductType(type, page, limit)
+        const res = await ProductService.getProductType(sort, page, limit,choice)
         if(res?.status == 'OK') {
 
             setProducts(res?.data)
@@ -33,10 +33,10 @@ const ProductsPage = () => {
     }
     console.log('first', panigate)
     useEffect(() => {
-        if(state){
-            fetchProductType(state, panigate.page, panigate.limit)
+        if(choiceSort.length>0){
+            fetchProductType(choiceSort, panigate.page, panigate.limit,choice)
         }
-    }, [state,panigate.page, panigate.limit])
+    }, [choiceSort,panigate.page, panigate.limit,choice])
 
 
     const onChange = (current, pageSize) => {
@@ -46,31 +46,95 @@ const ProductsPage = () => {
             limit: pageSize
         });
     }
+    const items1 = [
+      {
+        key: '1',
+        label: 'Bán chạy',
+      },
+      {
+        key: '2',
+        label: 'Mới nhất',
+      },
+      {
+        key: '3',
+        label: 'Giá giảm dần',
+      },
+      {
+        key: '4',
+        label: 'Giá tăng dần',
+      },
+      {
+        key: '5',
+        label: 'Từ A-Z',
+      },
+      {
+        key: '6',
+        label: 'Từ Z-A',
+      },
+    ];
+    useEffect(() => {
+      // Update choiceSort based on the active tab key
+      switch (activeTabKey) {
+        case '1':
+          setChoiceSort('countInStock')
+          setChoice('asc')
+          break;
+        case '2':
+          setChoiceSort('countInStock')
+          setChoice('desc')
+          break;
+        case '3':
+          setChoiceSort('price');
+          setChoice('desc');
+          break;
+        case '4':
+          setChoiceSort('price');
+          setChoice('asc');
+          break;
+        case '5':
+          setChoiceSort('name');
+          setChoice('desc');
+          break;
+        case '6':
+          setChoiceSort('name');
+          setChoice('asc');
+          break;
+        default:
+          setChoiceSort('countInStock');
+          setChoice('asc');
+      }
+    }, [activeTabKey]);
+    const onTabChange = (key) => {
+      setActiveTabKey(key);
+    };
   return (
     <div>
       <Container>
         <Row style={{margin: '10px 30px'}}>
           <Col span={18} push={6}>
-            <div style={{display: 'flex' ,flexWrap: 'wrap', gap: '5px'}}>
-             {products?.map((product) => {
-                    return (
-                    <CardProductComponent
-                        key={product._id}
-                        countInStock={product.countInStock}
-                        description={product.description}
-                        image={product.image}
-                        name={product.name}
-                        price={product.price}
-                        rating={product.rating}
-                        type={product.type}
-                        selled={product.selled}
-                        discount={product.discount}
-                        id={product._id}
-                    />
-                    )
-                })}
+            <Tabs defaultActiveKey="1" items={items1} onChange={onTabChange} />
+            <div>
+              <div style={{display: 'flex' ,flexWrap: 'wrap', gap: '5px'}}>
+              {products?.map((product) => {
+                      return (
+                      <CardProductComponent
+                          key={product._id}
+                          countInStock={product.countInStock}
+                          description={product.description}
+                          image={product.image}
+                          name={product.name}
+                          price={product.price}
+                          rating={product.rating}
+                          type={product.type}
+                          selled={product.selled}
+                          discount={product.discount}
+                          id={product._id}
+                      />
+                      )
+                  })}
+              </div>
+              <Pagination current={panigate.page + 1} total={panigate.total*10} onChange={onChange} style={{ textAlign: 'center', marginTop: '10px' }} />
             </div>
-            <Pagination current={panigate.page + 1} total={panigate.total*10} onChange={onChange} style={{ textAlign: 'center', marginTop: '10px' }} />
           </Col>
           <Col span={6} pull={18} style={{textAlign: 'center'}}>
             {/* <div className="category">

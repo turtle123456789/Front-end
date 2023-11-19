@@ -99,3 +99,28 @@ export const WrapperTextHeaderSmall = styled.span`
     color: var(--black);
     white-space: nowrap;
 `
+export const ResultProduct = styled.div`
+    min-height: 95px;
+    background: var(--white);
+    position: absolute;
+    width: 100%;
+    max-width: 635px;
+    top: 165px;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px  #888888;
+    padding: 0 20px;
+    overflow-y: auto;
+    max-height: 250px;
+`
+export const ListProduct = styled.div`
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px dotted;
+    cursor: pointer;
+    &&:hover{
+        background: rgba(0,0,0,.03) ;
+    }
+`
