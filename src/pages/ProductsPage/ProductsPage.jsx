@@ -4,11 +4,18 @@ import { Menu } from 'antd';
 import { Tabs } from 'antd';
 import { Container } from '../../components/ContainerComponent/ContainerComponent';
 import './style.css';
-import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useDebounce } from '../../hooks/useDebounce'
 import * as ProductService from '../../services/ProductService'
 import CardProductComponent from '../../components/CardProductComponent/CardProductComponent';
+import { useQuery } from '@tanstack/react-query';
+const productTypes = {
+  'chamsocda': 'Chăm sóc da',
+  'kemchongnang': 'Kem chống nắng',
+  'salevalentine': 'Sale Valentine',
+  'xitkhoang': 'Xịt khoáng',
+  'fanya': 'Fanya',
+};
+
+
 const ProductsPage = () => {
 
     const [products, setProducts] = useState([])
@@ -20,6 +27,7 @@ const ProductsPage = () => {
         limit: 12,
         total: 1,
     })
+    
     const fetchProductType = async (sort, page, limit) => {
 
         const res = await ProductService.getProductType(sort, page, limit,choice)
@@ -31,13 +39,68 @@ const ProductsPage = () => {
 
         }
     }
-    console.log('first', panigate)
     useEffect(() => {
         if(choiceSort.length>0){
             fetchProductType(choiceSort, panigate.page, panigate.limit,choice)
         }
     }, [choiceSort,panigate.page, panigate.limit,choice])
-
+    const fetchAllTypeProduct = async () => {
+      const res = await ProductService.getAllTypeProduct()
+      return res
+    }
+    const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
+    const fetchAllBrandProduct = async () => {
+      const res = await ProductService.getAllBrandProduct()
+      return res
+    }
+    const brandProduct = useQuery({ queryKey: ['brand-product'], queryFn: fetchAllBrandProduct })
+    const fetchAllPartBodyProduct = async () => {
+      const res = await ProductService.getAllPartBodyProduct()
+      return res
+    }
+    const partBodyProduct = useQuery({ queryKey: ['partBody-product'], queryFn: fetchAllPartBodyProduct })
+    const generateTypeMenuItems = () => {
+      if (typeProduct?.data?.data) {
+        return typeProduct.data.data.map((type, index) => getItem(`${type} `, `${type}`));
+      }
+      return [];
+    };
+    const generateBrandMenuItems = () => {
+      if (typeProduct?.data?.data) {
+        return brandProduct.data.data.map((brand, index) => getItem(`${brand} `, `${brand}`));
+      }
+      return [];
+    };
+    const generatePartBodyMenuItems = () => {
+      if (partBodyProduct?.data?.data) {
+        return partBodyProduct.data.data.map((partBody, index) => getItem(`${partBody} `, `${partBody}`));
+      }
+      return [];
+    };
+    function getItem(label, key, icon, children) {
+      return {
+        key,
+        icon,
+        children,
+         label,
+      };
+    }
+    const items = [
+      getItem('Bộ phận', 'partBody', null, generatePartBodyMenuItems()), 
+      getItem('Thương hiệu', 'brand', null, generateBrandMenuItems()), 
+      
+      getItem('Loại', 'type', null, generateTypeMenuItems()),
+    ];
+    const [mode] = useState('inline');
+    const [theme] = useState('light');
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const handleCheckboxChange = (optionKey) => {
+      if (selectedOptions.includes(optionKey)) {
+        setSelectedOptions(selectedOptions.filter((key) => key !== optionKey));
+      } else {
+        setSelectedOptions([...selectedOptions, optionKey]);
+          }
+      }
 
     const onChange = (current, pageSize) => {
         setPanigate({
@@ -107,6 +170,7 @@ const ProductsPage = () => {
     const onTabChange = (key) => {
       setActiveTabKey(key);
     };
+    
   return (
     <div>
       <Container>
@@ -118,17 +182,19 @@ const ProductsPage = () => {
               {products?.map((product) => {
                       return (
                       <CardProductComponent
-                          key={product._id}
-                          countInStock={product.countInStock}
-                          description={product.description}
-                          image={product.image}
-                          name={product.name}
-                          price={product.price}
-                          rating={product.rating}
-                          type={product.type}
-                          selled={product.selled}
-                          discount={product.discount}
-                          id={product._id}
+                      key={product._id}
+                      countInStock={product.countInStock}
+                      description={product.description}
+                      image={product.image}
+                      name={product.name}
+                      price={product.price}
+                      rating={product.rating}
+                      type={product.type}
+                      selled={product.selled}
+                      discount={product.discount}
+                      id={product._id}
+                      percentage={product.percentage}
+                      gift = {product.gift}
                       />
                       )
                   })}
@@ -137,9 +203,9 @@ const ProductsPage = () => {
             </div>
           </Col>
           <Col span={6} pull={18} style={{textAlign: 'center'}}>
-            {/* <div className="category">
+            <div className="category">
               <h3>Danh mục</h3>
-              <h4>{selectedProductTypeLabel}</h4>
+              <h4></h4>
             </div>
               <div className='FillterPrice'>
                 <Menu
@@ -175,7 +241,7 @@ const ProductsPage = () => {
                     </Menu.SubMenu>
                   ))}
                 </Menu>
-              </div> */}
+              </div>
           </Col>
         </Row>
       </Container>

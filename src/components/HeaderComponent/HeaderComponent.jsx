@@ -69,7 +69,7 @@ const HeaderComponent = () => {
   const fetchProduct = async (name) => {
     const res = await ProductService.getAllProduct(name)
     if(res?.status == 'OK') {
-      console.log('res?.data?.[0]?.name', res?.data?.[0]?.name)
+      console.log('res?.data?.[0]?.name', res?.data)
       setResultProduct(res?.data)
     }
     if(!res?.data?.[0]?.name){

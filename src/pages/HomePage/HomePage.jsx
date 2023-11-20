@@ -22,6 +22,9 @@ import CardProductComponent from '../../components/CardProductComponent/CardProd
 import { Link } from 'react-router-dom'
 const HomePage = () => {
   const [limit, setLimit] = useState(10)
+  const [partBody, setPartBody] = useState([])
+  const [choice, setChoice] = useState('partBody')
+  const [search, setSearch] = useState('môi')
   const fetchProductAll = async (context) => {
     const limit = context?.queryKey && context?.queryKey[1]
     const search = context?.queryKey && context?.queryKey[2]
@@ -30,6 +33,20 @@ const HomePage = () => {
     return res
 
   }
+  const fetchProductType = async (filter,choice, limit) => {
+
+    const res = await ProductService.getProductPartBody(filter, limit, choice)
+    if(res?.status == 'OK') {
+      setPartBody(res?.data)
+    }else {
+
+    }
+}
+useEffect(() => {
+  if(search.length>0){
+      fetchProductType(search, limit, choice)
+  }
+}, [search,limit,choice])
   const fetchAllTypeProduct = async () => {
     const res = await ProductService.getAllTypeProduct()
     return res
@@ -58,6 +75,7 @@ const HomePage = () => {
     };
   }, [menuTimeout]);
   const [width, setWidth] = useState(1476);
+  const [activeButton, setActiveButton] = useState('môi');
   return (
     <div>
       <Container>
@@ -320,18 +338,20 @@ const HomePage = () => {
           <h2>BEST SELLER</h2>
           <div className="groupButton">
             <button
-            className= 'button'
+            className= {`button ${activeButton === 'môi' ? 'active' : ''}`}
             onClick={() => {
-            
+              setSearch('môi')
+              setActiveButton('môi');
               setWidth(1476);
             }}
           >
             Trang điểm môi
             </button>
             <button
-              className= 'button'
+              className= {`button ${activeButton === 'mắt' ? 'active' : ''}`}
               onClick={() => {
-              
+                setSearch('mắt')
+                setActiveButton('mắt');
                 setWidth(1476);
 
               }}
@@ -339,9 +359,10 @@ const HomePage = () => {
               Trang điểm mắt
             </button>
             <button
-              className= 'button'
+              className= {`button ${activeButton === 'mặt' ? 'active' : ''}`}
               onClick={() => {
-              
+                setSearch('mặt')
+                setActiveButton('mặt');
                 setWidth(1476);
 
               }}
@@ -352,7 +373,7 @@ const HomePage = () => {
         </div>
 
         <BestSeller>
-          {products?.data?.map((product,limit) => {
+          {partBody?.map((product) => {
               return (
                 <CardProductComponent
                   key={product._id}
