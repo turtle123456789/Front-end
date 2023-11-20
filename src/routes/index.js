@@ -3,6 +3,7 @@ import OrderPage from "../pages/CartPage/CartPage";
 import CartPage from "../pages/CartPage/CartPage";
 import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
 import HomePage from "../pages/HomePage/HomePage";
+import IntroducePage from "../pages/IntroducePage/IntroducePage";
 import MyOrderPage from "../pages/MyOrder/MyOrder";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import OrderSucess from "../pages/OrderSuccess/OrderSuccess";
@@ -12,6 +13,7 @@ import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import SigninPage from "../pages/SigninPage/SigninPage";
+import StorePage from "../pages/StorePage/StorePage";
 
 export const routes = [
     {
@@ -72,6 +74,16 @@ export const routes = [
     {
         path: '/details-order/:id',
         page: DetailsOrderPage,
+        isShowHeader: true
+    },
+    {
+        path: '/IntroducePage',
+        page: IntroducePage,
+        isShowHeader: true
+    },
+    {
+        path: '/StorePage',
+        page: StorePage,
         isShowHeader: true
     },
     {

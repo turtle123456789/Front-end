@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container } from '../../components/ContainerComponent/ContainerComponent'
 import { LayoutSigin, MethodRegister } from './style'
-import { Col, Form, Row,Checkbox, Input } from 'antd'
+import { Col, Form, Row,Checkbox, Input, message } from 'antd'
 import iconFace from '../../assets/images/iconFace.png'
 import iconGoogle from '../../assets/images/iconGoogle.png'
 import { Link, useNavigate } from 'react-router-dom'
@@ -18,14 +18,19 @@ const SigninPage = () => {
   )
   const {data,isError,isSuccess} = mutation
   useEffect(()=>{
+    console.log('isSuccess', data?.status)
     if(isSuccess){
-      navigate('/')
-      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-      if(data?.access_token) {
-        const decoded = jwtDecode(data?.access_token);
-        if(decoded?.id){
-          handleGetDetailsUser(decoded?.id, data?.access_token)
+      if(data?.status==='OK'){
+        navigate('/')
+        localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+        if(data?.access_token) {
+          const decoded = jwtDecode(data?.access_token);
+          if(decoded?.id){
+            handleGetDetailsUser(decoded?.id, data?.access_token)
+          }
         }
+      }else{
+        message.error("Mật khẩu hoặc Email không đúng!")
       }
     }
   },[isSuccess,navigate])
@@ -125,8 +130,7 @@ const SigninPage = () => {
                     <Link className='Google'><img src={iconGoogle} alt="" />Google</Link>
                   </MethodRegister>
                   
-                    <div style={{textAlign: 'center'}}>
-                      {data?.status === 'ERR' && <span style={{color: 'red'}}>{data?.message}</span>}
+                    <div style={{textAlign: 'center'}}> 
                       <button button type="primary" htmlType="submit" id='btnSignin'>Đăng nhập</button>
                     </div>
                   </Form>

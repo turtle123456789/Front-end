@@ -51,6 +51,7 @@ useEffect(() => {
     const res = await ProductService.getAllTypeProduct()
     return res
   }
+
   const typeProduct = useQuery({ queryKey: ['type-product'], queryFn: fetchAllTypeProduct })
   const {data: products}= useQuery(['products', limit], fetchProductAll,{retry: 3,retryDelay: 1000})
 

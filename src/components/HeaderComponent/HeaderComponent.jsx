@@ -18,7 +18,6 @@ import { useSelector } from 'react-redux'
 import {useDispatch} from 'react-redux'
 import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/userSlide'
-import { WrapperHeaderItem } from '../../pages/MyOrder/style'
 import { convertPrice } from '../../utils'
 const HeaderComponent = () => {
   const order = useSelector((state) => state.order)
@@ -69,7 +68,6 @@ const HeaderComponent = () => {
   const fetchProduct = async (name) => {
     const res = await ProductService.getAllProduct(name)
     if(res?.status == 'OK') {
-      console.log('res?.data?.[0]?.name', res?.data)
       setResultProduct(res?.data)
     }
     if(!res?.data?.[0]?.name){
@@ -154,11 +152,9 @@ const HeaderComponent = () => {
                   }
                 </ResultProduct>
               <ChooseUse>
-                <Link to="/ProductsPage/chamsoc da">Chăm sóc da</Link>
-                <Link to="/ProductsPage/kemchongnang">Kem chống nắng</Link>
-                <Link to="/ProductsPage/salevalentine">Sale Valentine</Link>
-                <Link to="/ProductsPage/xitkhoang">Xịt khoáng</Link>
-                <Link to="/ProductsPage/fanya">Fanya</Link>
+                <Link  to="/Products" style={{fontWeight: "600"}}>Sản Phẩm</Link>
+                <Link to="/StorePage" style={{fontWeight: "600"}}>Hệ thống cửa hàng</Link>
+                <Link to="/IntroducePage" style={{fontWeight: "600"}}>Giới thiệu</Link>
               </ChooseUse>
             </SearchProduct>
               <IconContact href={"https://www.facebook.com/profile.php?id=100057094481241"}>
