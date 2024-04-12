@@ -24,7 +24,7 @@ const HomePage = () => {
   const [limit, setLimit] = useState(10)
   const [partBody, setPartBody] = useState([])
   const [choice, setChoice] = useState('partBody')
-  const [search, setSearch] = useState('môi')
+  const [search, setSearch] = useState('Môi')
   const fetchProductAll = async (context) => {
     const limit = context?.queryKey && context?.queryKey[1]
     const search = context?.queryKey && context?.queryKey[2]
@@ -76,7 +76,7 @@ useEffect(() => {
     };
   }, [menuTimeout]);
   const [width, setWidth] = useState(1476);
-  const [activeButton, setActiveButton] = useState('môi');
+  const [activeButton, setActiveButton] = useState('Môi');
   return (
     <div>
       <Container>
@@ -339,20 +339,20 @@ useEffect(() => {
           <h2>BEST SELLER</h2>
           <div className="groupButton">
             <button
-            className= {`button ${activeButton === 'môi' ? 'active' : ''}`}
+            className= {`button ${activeButton === 'Môi' ? 'active' : ''}`}
             onClick={() => {
-              setSearch('môi')
-              setActiveButton('môi');
+              setSearch('Môi')
+              setActiveButton('Môi');
               setWidth(1476);
             }}
           >
             Trang điểm môi
             </button>
             <button
-              className= {`button ${activeButton === 'mắt' ? 'active' : ''}`}
+              className= {`button ${activeButton === 'Mắt' ? 'active' : ''}`}
               onClick={() => {
-                setSearch('mắt')
-                setActiveButton('mắt');
+                setSearch('Mắt')
+                setActiveButton('Mắt');
                 setWidth(1476);
 
               }}
@@ -360,10 +360,10 @@ useEffect(() => {
               Trang điểm mắt
             </button>
             <button
-              className= {`button ${activeButton === 'mặt' ? 'active' : ''}`}
+              className= {`button ${activeButton === 'Mặt' ? 'active' : ''}`}
               onClick={() => {
-                setSearch('mặt')
-                setActiveButton('mặt');
+                setSearch('Mặt')
+                setActiveButton('Mặt');
                 setWidth(1476);
 
               }}

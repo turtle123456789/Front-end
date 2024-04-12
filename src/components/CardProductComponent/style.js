@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import '../../index.css'
 export const ProductImg = styled.div`
+display: flex;
+    align-items: center;
+    justify-content: center;
     img{
-        width: 100%;
+        height: 234px;
+        width: 250px;
         border-radius: 10px;
     }
 `

@@ -122,6 +122,8 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
           autoplaySpeed: 2000,
           autoplay: true,
           cssEase: "linear",
+          centerMode: true,
+          centerPadding: "0",
       };
       
 
@@ -194,11 +196,11 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
                           <WatchProduct>
                           <img src={productDetails?.image} alt="" />
                           <Slider {...settings}>
-                              <img src={productDetails?.image} alt="" onClick={() => handleImageClick(img2)} />
-                              <img src={productDetails?.image1} alt="" onClick={() => handleImageClick(img3)} />
-                              <img src={productDetails?.image2} alt="" onClick={() => handleImageClick(img4)} />
-                              <img src={productDetails?.image3} alt="" onClick={() => handleImageClick(img5)} />
-                              <img src={productDetails?.image4} alt="" onClick={() => handleImageClick(img2)} />
+                              <img style={{maxHeight: "40px",}} src={productDetails?.image} alt="" onClick={() => handleImageClick(img2)} />
+                              <img style={{maxHeight: "40px",}} src={productDetails?.image1} alt="" onClick={() => handleImageClick(img3)} />
+                              <img style={{maxHeight: "40px",}} src={productDetails?.image2} alt="" onClick={() => handleImageClick(img4)} />
+                              <img style={{maxHeight: "40px",}} src={productDetails?.image3} alt="" onClick={() => handleImageClick(img5)} />
+                              <img style={{maxHeight: "40px",}} src={productDetails?.image4} alt="" onClick={() => handleImageClick(img2)} />
                           </Slider>
                           </WatchProduct>
                       </Col>
@@ -226,8 +228,8 @@ import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
                           <br />
                           <ProductPrice>
                               <div>
-                                  <span className="originalPrice" style={{fontSize: '35px'}}>{formatNumber(productDetails?.price)} đ</span>
-                                  <span className="discountedPrice">{formatNumber(productDetails?.discount)} đ</span>
+                                  <span className="originalPrice" style={{fontSize: '35px'}}>{formatNumber(productDetails?.discount)} đ</span>
+                                  <span className="discountedPrice">{formatNumber(productDetails?.price)} đ</span>
                               </div>
                               <span className='discountPercentage'>{percentages}%</span>
                           </ProductPrice>

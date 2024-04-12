@@ -152,7 +152,7 @@ const HeaderComponent = () => {
                   }
                 </ResultProduct>
               <ChooseUse>
-                <Link  to="/Products" style={{fontWeight: "600"}}>Sản Phẩm</Link>
+                <a href={"Products"} style={{fontWeight: "600"}}>Sản Phẩm</a>
                 <Link to="/StorePage" style={{fontWeight: "600"}}>Hệ thống cửa hàng</Link>
                 <Link to="/IntroducePage" style={{fontWeight: "600"}}>Giới thiệu</Link>
               </ChooseUse>

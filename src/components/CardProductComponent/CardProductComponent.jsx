@@ -28,7 +28,7 @@ const CardProductComponent = (props) => {
           </Link>
         </ProductName>
         <ProductContent>
-          <Link to={`/ProductDetails/${id}`} className='crop-text2' style={{height: '50px'}}>{description}</Link>
+          <Link to={`/ProductDetails/${id}`} className='crop-text2' style={{    maxHeight: "40px"}}>{description}</Link>
         </ProductContent>
         <ProductPrice>
           <div>
