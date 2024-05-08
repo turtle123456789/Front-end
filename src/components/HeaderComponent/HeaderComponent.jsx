@@ -37,7 +37,7 @@ const HeaderComponent = () => {
   useEffect(() => {
     setUserName(user?.name)
     setUserAvatar(user?.avatar)
-  }, [user?.name, user?.avatar])
+  }, [])
   const content = (
     <div>
         <Logout onClick={() => handleClickNavigate()}>Đăng xuất</Logout>
